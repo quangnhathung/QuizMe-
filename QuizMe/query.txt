@@ -1,0 +1,418 @@
+﻿Create database quizme_db;
+go
+use quizme_db;
+go
+
+
+Create table Lop(
+	Id char(10) primary key,
+	SiSo int
+);
+go
+create table Users(
+	Uid char(10) primary key,
+	Ten Nvarchar(100),
+	Password char(18),
+	GioiTinh nvarchar(5),
+	Role char(30),
+	Ngaysinh datetime,
+	MaLop char(10),
+	Phone char(10),
+	constraint Fk_sv_lop foreign key (MaLop) references Lop(Id),
+);
+go
+create table MonThi(
+	Id char(5) primary key,
+	Name nvarchar(40),
+	SoCauHoi int,
+	ThoiGianThi int
+);
+go
+create table CauHoi(
+	Id char(5) primary key,
+	NoiDung nvarchar(max),
+	DapAn int,
+	MaMon char(5),
+	constraint Cauhoi_MonHoc foreign key (MaMon) references MonThi(Id)
+);
+go
+create table KetQua(
+	MaMon  char(5),
+	MaSinhvien char(10),
+	Diem float,
+	LanThi int,
+	constraint pk_Ketqua primary key (MaMon, MaSinhVien),
+	constraint Fk_kq_Mon foreign key (MaMon) references MonThi(Id),
+	constraint Fk_kq_user foreign key (MaSinhVien) references Users(UId)
+);
+go
+-- trigger
+
+--si so
+CREATE TRIGGER trg_Users_Insert_Siso
+ON Users
+AFTER INSERT
+AS
+BEGIN
+    UPDATE Lop
+    SET SiSo = SiSo + 1
+    WHERE Lop.Id IN (SELECT MaLop FROM inserted WHERE MaLop IS NOT NULL);
+END;
+go
+CREATE TRIGGER trg_Users_Delete_Siso
+ON Users
+AFTER DELETE
+AS
+BEGIN
+    UPDATE Lop
+    SET SiSo = SiSo - 1
+    WHERE Lop.Id IN (SELECT MaLop FROM deleted WHERE MaLop IS NOT NULL);
+END;
+go
+-- trigger dap an tu 1-4
+CREATE TRIGGER trg_CauHoi_CheckDapAn
+ON CauHoi
+FOR INSERT, UPDATE
+AS
+BEGIN
+    IF EXISTS (SELECT * FROM inserted WHERE DapAn NOT BETWEEN 1 AND 4)
+    BEGIN
+        RAISERROR ('DapAn phải nằm trong khoảng 1 đến 4!', 16, 1);
+        ROLLBACK TRANSACTION;
+    END
+END;
+go
+-- tang lan thi neu sin vien thi lai
+GO
+CREATE TRIGGER trg_KetQua_UpdateLanThi
+ON KetQua
+INSTEAD OF INSERT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- 1) Cập nhật điểm và tăng lần thi cho các sinh viên đã từng thi môn này
+    UPDATE k
+    SET 
+        k.LanThi = k.LanThi + 1,
+        k.Diem = i.Diem
+    FROM KetQua k
+    INNER JOIN inserted i
+        ON k.MaMon = i.MaMon
+       AND k.MaSinhVien = i.MaSinhVien;
+
+    -- 2) Thêm dữ liệu mới cho sinh viên thi lần đầu
+    INSERT INTO KetQua (MaMon, MaSinhVien, Diem, LanThi)
+    SELECT i.MaMon, i.MaSinhVien, i.Diem, 1
+    FROM inserted i
+    LEFT JOIN KetQua k
+        ON k.MaMon = i.MaMon
+       AND k.MaSinhVien = i.MaSinhVien
+    WHERE k.MaMon IS NULL;
+END;
+GO
+
+
+go
+--Them lop
+
+DECLARE @i INT = 1;
+WHILE @i <= 15
+BEGIN
+    INSERT INTO Lop(Id, SiSo)
+    VALUES ('14DHTH' + RIGHT('0' + CAST(@i AS VARCHAR(2)), 2), 0);
+    SET @i = @i + 1;
+END;
+go
+--thêm môn học
+
+INSERT INTO MonThi (Id, Name, SoCauHoi, ThoiGianThi)
+VALUES
+('MT001', N'Anh văn', 40, 45),
+('MT002', N'Đại số tuyến tính', 25, 60),
+('MT003', N'Mạng máy tính', 40, 45),
+('MT004', N'Hóa', 25, 60),
+('MT005', N'Sinh', 40, 45);
+go
+--Thêm câu hỏi
+INSERT INTO CauHoi (Id, NoiDung, DapAn, MaMon)
+VALUES
+-- MT001: Anh văn (00001 - 00050)
+('00001', N'Choose the correct sentence: _He don''t like coffee|He doesn''t like coffee|He not like coffee|He isn''t like coffee', 2, 'MT001'),
+('00002', N'Choose the best word to complete: I have been living here ___ 2010. _for|since|from|ago', 2, 'MT001'),
+('00003', N'What is the past form of "go"? _goed|went|gone|goes', 2, 'MT001'),
+('00004', N'Choose the correct passive: The book ___ by Mary last week. _is wrote|was written|wrote|written', 2, 'MT001'),
+('00005', N'Choose correct preposition: She is interested ___ music. _on|in|at|for', 2, 'MT001'),
+('00006', N'Choose the correct comparative: This test is ___ than the last one. _easyer|easier|more easy|most easy', 2, 'MT001'),
+('00007', N'Choose the correct modal: You ___ smoke in here. It is forbidden. _can|must|must not|may', 3, 'MT001'),
+('00008', N'Choose the correct article: I saw ___ elephant at the zoo. _a|an|the|Ø', 2, 'MT001'),
+('00009', N'Choose the correct tag question: She can swim, ___? _can she|can''t she|can''t he|can he', 2, 'MT001'),
+('00010', N'Choose correct form: If I ___ rich, I would travel the world. _am|were|was|be', 2, 'MT001'),
+('00011', N'Choose synonym of "begin": _finish|start|stop|end', 2, 'MT001'),
+('00012', N'Which sentence is correct? _He has visited Paris last year.|He visited Paris last year.|He has visit Paris last year.|He had visited Paris last year.', 2, 'MT001'),
+('00013', N'Choose the right phrasal verb: She ___ up smoking two years ago. _gave|gave up|put up|made up', 2, 'MT001'),
+('00014', N'Fill the blank: I would rather you ___ earlier. _come|came|comes|coming', 2, 'MT001'),
+('00015', N'Choose correct tense: By next year, I ___ my degree. _will finish|will have finished|finished|am finishing', 2, 'MT001'),
+('00016', N'Choose correct word: He speaks English ___ than his brother. _well|better|best|more well', 2, 'MT001'),
+('00017', N'Choose correct preposition: She is married ___ a doctor. _to|with|of|by', 1, 'MT001'),
+('00018', N'Choose correct sentence: ___ you ever been to Japan? _Did|Have|Had|Do', 2, 'MT001'),
+('00019', N'Choose the antonym of "ancient": _old|modern|ancient|historic', 2, 'MT001'),
+('00020', N'Choose correct plural: One child, two ___ . _childs|children|childes|child', 2, 'MT001'),
+('00021', N'Choose correct word order: I have never ___ to London. _been|go|gone|going', 1, 'MT001'),
+('00022', N'Choose the correct collocation: Make ___ a decision. _up|in|to|on', 1, 'MT001'),
+('00023', N'Choose the best connector: I was tired, ___ I went to bed early. _so|but|and|or', 1, 'MT001'),
+('00024', N'Choose correct passive: The windows ___ every month. _are clean|are cleaned|cleaned|is cleaned', 2, 'MT001'),
+('00025', N'Choose the word with different stress: _photograph|photography|photographer|photo', 4, 'MT001'),
+('00026', N'Choose correct form: She insisted that he ___ there. _is|be|was|were', 2, 'MT001'),
+('00027', N'Choose the correct preposition: He is good ___ playing chess. _in|at|on|for', 2, 'MT001'),
+('00028', N'Choose the right pronoun: ___ of the students passed the exam. _Many|Most|Much|Little', 2, 'MT001'),
+('00029', N'Choose correct tense: When I arrived, they ___ dinner. _have finished|had finished|finished|were finishing', 2, 'MT001'),
+('00030', N'Choose correct sentence: She suggested ___ a taxi. _to take|take|taking|took', 3, 'MT001'),
+('00031', N'Choose correct form: I wish I ___ more time. _have|had|has|having', 2, 'MT001'),
+('00032', N'Choose correct relative pronoun: The man ___ car was stolen reported it. _whose|which|that|whom', 1, 'MT001'),
+('00033', N'Choose word that fits: He is used ___ hard work. _to|for|with|of', 1, 'MT001'),
+('00034', N'Choose correct sentence: There is ___ milk in the fridge. _some|any|no|many', 1, 'MT001'),
+('00035', N'Choose the correct form: She has been working here ___ 2012. _for|since|from|during', 2, 'MT001'),
+('00036', N'Select correct passive: They will finish the work ___ Friday. _at|on|by|in', 3, 'MT001'),
+('00037', N'Choose the correct word: He told me a ___ story. _interesting|interest|interested|interestingly', 1, 'MT001'),
+('00038', N'Choose correct infinitive/gerund: He enjoys ___ novels. _read|reading|to read|reads', 2, 'MT001'),
+('00039', N'Choose correct modal: You ___ see a doctor if it persists. _must|should|need|might', 2, 'MT001'),
+('00040', N'Choose correct sentence: Neither John nor his friends ___ ready. _is|are|were|be', 2, 'MT001'),
+('00041', N'Choose correct expression: I can''t stand ___ noise. _an|the|Ø|a', 3, 'MT001'),
+('00042', N'Choose synonym of "obtain": _lose|get|miss|fail', 2, 'MT001'),
+('00043', N'Choose correct tense: He said he ___ the letter the day before. _had received|has received|received|receives', 1, 'MT001'),
+('00044', N'Choose correct word: She is responsible ___ the project. _to|for|with|at', 2, 'MT001'),
+('00045', N'Choose the correct conditional: If he had studied, he ___ passed. _would|would have|will have|would had', 2, 'MT001'),
+('00046', N'Choose correct phrasal verb: The plane takes ___ at 7 AM. _off|up|in|out', 1, 'MT001'),
+('00047', N'Choose correct comparison: This is the ___ book I have read. _more interesting|most interesting|more interested|most interested', 2, 'MT001'),
+('00048', N'Choose correct vocabulary: She gave me a ___ advice. _good|well|better|best', 1, 'MT001'),
+('00049', N'Choose correct sequence: First we will eat, ___ we will go out. _and|then|but|or', 2, 'MT001'),
+('00050', N'Choose correct pronoun: Each of the students ___ a book. _have|has|are|is', 2, 'MT001'),
+
+-- MT002: Đại số tuyến tính (00051 - 00100)
+('00051', N'Cho matrix A 2x2, nếu det(A)=0 thì A là: _đảo được|không khả nghịch|chéo|đối xứng', 2, 'MT002'),
+('00052', N'Một hệ phương trình tuyến tính vô nghiệm khi: _ma trận mở rộng có hạng lớn hơn ma trận hệ số|hạng bằng nhau|ma trận hệ số không vuông|tất cả nghiệm', 1, 'MT002'),
+('00053', N'Vector (1,2,3) và (2,4,6) là: _độc lập tuyến tính|tuyến tính phụ thuộc|vuông góc|không liên quan', 2, 'MT002'),
+('00054', N'Một ma trận vuông A có A^T = A thì gọi là: _ma trận đối xứng|ma trận chéo|ma trận phản đối xứng|ma trận đơn vị', 1, 'MT002'),
+('00055', N'Định nghĩa của eigenvalue λ: tồn tại vector v ≠ 0 sao cho: _A v = λ v|A+v=λ|Av= v/λ|vA=λv', 1, 'MT002'),
+('00056', N'Rank của ma trận là: _số cột độc lập tuyến tính lớn nhất|số hàng|phần tử khác 0|determinant', 1, 'MT002'),
+('00057', N'Cho A 3x3 có định thức khác 0 ⇒ A có: _nghiệm duy nhất cho Ax=0|vô số nghiệm Ax=0|không nghiệm|hạng 2', 1, 'MT002'),
+('00058', N'Phép biến hình tuyến tính ánh xạ 0 thành: _0|một vector bất kỳ|tổng|determinant', 1, 'MT002'),
+('00059', N'Chuỗi cơ sở chuẩn hóa thường sử dụng: _quy trình Gram-Schmidt|Gauss elimination|LU decomposition|QR decomposition', 1, 'MT002'),
+('00060', N'Trong không gian Euclid, hai vector vuông góc nếu tích trong (dot product) bằng: _1|0|-1|không xác định', 2, 'MT002'),
+('00061', N'Ma trận chuyển vị của [[1,2],[3,4]] là: _[[1,3],[2,4]]|[[4,3],[2,1]]|[[1,2],[3,4]]|[[2,1],[4,3]]', 1, 'MT002'),
+('00062', N'Để giải hệ Ax=b có thể dùng: _phương pháp Gauss|phương pháp Simpson|phương pháp Euler|phương pháp Runge-Kutta', 1, 'MT002'),
+('00063', N'Định nghĩa ma trận đơn vị I có property: _AI = A và IA = A|A+I = I|det(I)=0|I không tồn tại', 1, 'MT002'),
+('00064', N'Giá trị riêng của ma trận [[2,0],[0,3]] là: _2 và 3|5 và 0|2 và 2|3 và 3', 1, 'MT002'),
+('00065', N'Ma trận nghịch đảo A^{-1} tồn tại nếu và chỉ nếu: _det(A) ≠ 0|det(A)=0|A đối xứng|A chéo', 1, 'MT002'),
+('00066', N'Phép phân tích LU dùng để: _giải hệ tuyến tính nhanh hơn|tính tích phân|tối ưu hóa|vẽ đồ thị', 1, 'MT002'),
+('00067', N'Nếu v là eigenvector tương ứng λ, thì v không thể là: _vector 0|vector khác 0|phép tuyến tính|vector cơ sở', 1, 'MT002'),
+('00068', N'Đẳng thức đúng: det(AB) = _det(A) + det(B)|det(A)det(B)|det(B) - det(A)|det(A)/det(B)', 2, 'MT002'),
+('00069', N'Không gian con (subspace) phải thỏa: _chứa vector 0 và đóng dưới cộng và nhân vô hướng|phải hữu hạn chiều|có determinant|phải vuông', 1, 'MT002'),
+('00070', N'Ma trận trực giao Q có property: _Q^T Q = I|Q Q = I|det(Q)=0|Q đối xứng', 1, 'MT002'),
+('00071', N'Hệ phương trình đồng nhất Ax=0 luôn có nghiệm: _nghiệm duy nhất x=0 nếu det(A)≠0|vô số nghiệm nếu det(A)≠0|không nghiệm|chỉ nghiệm 1 phần tử', 1, 'MT002'),
+('00072', N'Phép chiếu orthogonal lên một không gian con thường dùng: _ma trận P có P^2 = P và P^T = P|ma trận trái ngược|phân tích LU|phân tích SVD', 1, 'MT002'),
+('00073', N'Độ dài (norm) của vector v = (3,4) là: _5|7|25|√7', 1, 'MT002'),
+('00074', N'Định thức của ma trận tam giác trên bằng tích các: _phần tử chéo chính|phần tử ngoài|hàng|cột', 1, 'MT002'),
+('00075', N'Tích vô hướng (dot product) giữa (1,2,3) và (4,5,6) là: _32|27|45|22', 1, 'MT002'),
+('00076', N'Ma trận SVD phân tích ma trận A thành UΣV^T, Σ chứa: _singular values|eigenvalues|trace|rank', 1, 'MT002'),
+('00077', N'Phép nhân ma trận không giao hoán nghĩa: _AB ≠ BA nói chung|AB = BA luôn luôn|A+B=B+A|A-B=B-A', 1, 'MT002'),
+('00078', N'Để tìm inverse có thể dùng: _adj(A)/det(A) cho ma trận nhỏ|phương pháp Monte Carlo|phương pháp Simpson|phương pháp Newton', 1, 'MT002'),
+('00079', N'Độ độc lập tuyến tính của tập vector kiểm tra bằng: _determinant của ma trận có cột là các vector ≠ 0|tổng các vector|tích các vector|phân tích Fourier', 1, 'MT002'),
+('00080', N'Ưu điểm của QR decomposition trong giải hệ là: _ổn định số học cao hơn Gauss|nhanh hơn tất cả|không dùng được|phức tạp hơn LU', 1, 'MT002'),
+('00081', N'Trong không gian R^n, một cơ sở có n vector độc lập tuyến tính và: _tạo thành toàn bộ không gian|rỗng|có determinant 0|chỉ có 1 vector', 1, 'MT002'),
+('00082', N'Trace của ma trận là: _tổng các phần tử trên đường chéo chính|tổng mọi phần tử|tích các phần tử chéo|determinant', 1, 'MT002'),
+('00083', N'If A is symmetric and positive definite then all eigenvalues are: _positive|negative|zero|complex', 1, 'MT002'),
+('00084', N'Gauss elimination chủ yếu để: _chuyển ma trận về dạng bậc thang|tính đạo hàm|tính tích phân|tối ưu hóa', 1, 'MT002'),
+('00085', N'Phép nhân vô hướng giữa vectors u và v bằng 0 nghĩa là: _u vuông góc với v|u song song v|u phụ thuộc v|không thể xác định', 1, 'MT002'),
+('00086', N'Định nghĩa orthonormal basis: cơ sở gồm các vector _đơn vị và vuông góc với nhau|chỉ vuông góc|chỉ đơn vị|không vuông góc', 1, 'MT002'),
+('00087', N'Phép đồng nhất (identity) I có rank: _n cho I kích thước n|0|1|n-1', 1, 'MT002'),
+('00088', N'Độ lớn nhất của một hệ tuyến tính vuông không suy giảm khi: _thay đổi scaling các cột có thể ảnh hưởng đến conditioning|không thay đổi|luôn tăng|luôn giảm', 1, 'MT002'),
+('00089', N'Ứng dụng chính của eigen-decomposition trong xử lý tín hiệu là: _phân tích modes và giảm chiều dữ liệu|tính tích phân|vẽ đồ thị|lập trình web', 1, 'MT002'),
+('00090', N'Để kiểm tra hai ma trận A và B tương đương tuyến tính, so sánh: _hạng(A)=hạng(B)|det(A)=det(B)|trace|các phần tử tương ứng', 1, 'MT002'),
+('00091', N'Phân tích SVD có thể dùng cho: _giảm chiều (PCA)|viết lại phương trình vi phân|tối ưu hóa integer|vẽ đồ thị 3D', 1, 'MT002'),
+('00092', N'Độ phức tạp số học của Gauss elimination cho hệ n x n xấp xỉ: _O(n^3)|O(n^2)|O(n)|O(n^4)', 1, 'MT002'),
+('00093', N'Trong thực tế, pivoting trong Gauss dùng để: _tránh chia cho số nhỏ và tăng ổn định|tăng độ khó|tính nhanh hơn|không cần thiết', 1, 'MT002'),
+('00094', N'Nullspace của ma trận A là tập các x sao cho: _Ax = 0|xA = 0|det(Ax)=0|Ax = b', 1, 'MT002'),
+('00095', N'Định nghĩa orthogonal complement W^⊥ là tập các vector: _vuông góc với mọi vector trong W|thuộc W|tổng của W|không xác định', 1, 'MT002'),
+('00096', N'Hàm tuyến tính f:V→W phải thỏa: _f(u+v)=f(u)+f(v) và f(cu)=c f(u)|f là bất kỳ hàm|f không cần tuân theo quy tắc', 1, 'MT002'),
+('00097', N'Phép biến đổi tuyến tính có ma trận biểu diễn phụ thuộc vào: _cơ sở đã chọn|kích thước|determinant|số hàng', 1, 'MT002'),
+('00098', N'Đặc trưng của ma trận dạng chéo là: _các phần tử không chéo bằng 0|các phần tử ngoài đường chéo bằng 0|determinant=0|rank=0', 2, 'MT002'),
+('00099', N'Giá trị singular lớn nhất của ma trận cho biết: _độ giãn lớn nhất trên một vector đơn vị|determinant|trace|rank', 1, 'MT002'),
+('00100', N'Inverse của ma trận chéo dễ tính vì: _là nghịch đảo từng phần tử chéo|phải dùng Gauss|không tồn tại|phải dùng SVD', 1, 'MT002'),
+
+-- MT003: Mạng máy tính (00101 - 00150)
+('00101', N'OSI layer nào chịu trách nhiệm truyền tin vật lý? _Physical layer|Data Link layer|Network layer|Transport layer', 1, 'MT003'),
+('00102', N'IP là viết tắt của: _Internet Protocol|Internal Protocol|Internet Program|Interface Protocol', 1, 'MT003'),
+('00103', N'Giao thức TCP khác UDP ở điểm: _TCP có kết nối và đảm bảo độ tin cậy|UDP có kiểm soát luồng|TCP không dùng port|UDP có kết nối', 1, 'MT003'),
+('00104', N'Địa chỉ MAC là: _địa chỉ vật lý của NIC|địa chỉ IP|địa chỉ mạng|địa chỉ port', 1, 'MT003'),
+('00105', N'Subnet mask 255.255.255.0 tương ứng prefix: _/24|/16|/8|/32', 1, 'MT003'),
+('00106', N'Giao thức định tuyến nội bộ phổ biến: _OSPF|FTP|HTTP|SMTP', 1, 'MT003'),
+('00107', N'Port mặc định HTTP là: _80|21|443|25', 1, 'MT003'),
+('00108', N'ARP dùng để: _mapping IP sang MAC|mapping domain sang IP|tunnel data|encrypt data', 1, 'MT003'),
+('00109', N'Ping sử dụng giao thức: _ICMP|TCP|UDP|HTTP', 1, 'MT003'),
+('00110', N'Giao thức bảo mật web HTTPS sử dụng: _TLS/SSL|FTP|SMTP|SNMP', 1, 'MT003'),
+('00111', N'NAT dùng để: _dịch địa chỉ nội bộ sang địa chỉ công cộng|mã hóa dữ liệu|định tuyến|ghi log', 1, 'MT003'),
+('00112', N'Layer nào xử lý địa chỉ logic (IP)? _Network layer|Data Link|Physical|Application', 1, 'MT003'),
+('00113', N'Switch hoạt động ở layer: _Data Link (Layer 2)|Network (Layer 3)|Physical|Application', 1, 'MT003'),
+('00114', N'Router dùng cho: _kết nối mạng khác mạng và định tuyến|kết nối thiết bị trong cùng mạng|lưu trữ|bảo mật', 1, 'MT003'),
+('00115', N'Giao thức DHCP để: _cấp IP tự động|trasmit file|quản lý mạng|bảo mật', 1, 'MT003'),
+('00116', N'Trong TCP handshake có bao nhiêu bước cơ bản? _3|2|4|1', 1, 'MT003'),
+('00117', N'OSI layer nào chứa giao thức SMTP? _Application layer|Transport|Network|Data Link', 1, 'MT003'),
+('00118', N'Giao thức FTP dùng port: _21|20|80|443', 1, 'MT003'),
+('00119', N'Trong mô hình TCP/IP, tầng tương ứng với OSI Application là: _Application|Transport|Internet|Link', 1, 'MT003'),
+('00120', N'IPv6 có độ dài địa chỉ: _128 bit|32 bit|64 bit|256 bit', 1, 'MT003'),
+('00121', N'VPN giúp: _tạo kết nối an toàn qua mạng công cộng|tăng tốc mạng|thay đổi IP|giảm băng thông', 1, 'MT003'),
+('00122', N'Giao thức ICMP chủ yếu dùng cho: _diagnostics và lỗi mạng|truyền file|gửi email|quản lý web', 1, 'MT003'),
+('00123', N'Checksum trong TCP dùng để: _kiểm tra lỗi dữ liệu|mã hóa|định tuyến|nén dữ liệu', 1, 'MT003'),
+('00124', N'OSI layer nào chịu trách nhiệm segmentation và reassembly? _Transport layer|Network|Data Link|Physical', 1, 'MT003'),
+('00125', N'Giao thức SSL hoạt động ở layer nào (lược đồ): _Giữa Transport và Application|Physical|Data Link|Network', 1, 'MT003'),
+('00126', N'Round-trip time (RTT) là: _thời gian một gói đi và về|thời gian gửi 1 chiều|thời gian xử lý server|thời gian chờ DNS', 1, 'MT003'),
+('00127', N'Collision domain nhỏ hơn khi dùng: _switch thay vì hub|hub thay vì switch|router thay vì switch|bridge thay vì switch', 1, 'MT003'),
+('00128', N'Broadcast domain bị giới hạn bởi: _router|switch|hub|NIC', 1, 'MT003'),
+('00129', N'Giao thức SNMP dùng để: _giám sát và quản lý mạng|gửi email|truyền file|bảo mật web', 1, 'MT003'),
+('00130', N'Bandwidth khác Latency ở điểm: _bandwidth là băng thông, latency là độ trễ|giống nhau|bandwidth là delay|latency là throughput', 1, 'MT003'),
+('00131', N'DNS dùng để: _dịch tên miền sang IP|dịch IP sang MAC|mã hóa kết nối|định tuyến', 1, 'MT003'),
+('00132', N'HTTP/2 cải tiến so với HTTP/1.1 chủ yếu ở: _multiplexing và hiệu năng|bảo mật|port mặc định|định tuyến', 1, 'MT003'),
+('00133', N'Giao thức BGP chuyên dùng cho: _định tuyến giữa AS (Internet backbone)|mạng LAN|mạng viễn thông|định tuyến nội bộ', 1, 'MT003'),
+('00134', N'802.11n là chuẩn cho: _Wi-Fi|Ethernet|Bluetooth|Cellular', 1, 'MT003'),
+('00135', N'OSI layer handling frames is: _Data Link layer|Network|Physical|Application', 1, 'MT003'),
+('00136', N'CIDR notation 192.168.0.0/16 represents: _subnet mask 255.255.0.0|255.255.255.0|/24|/8', 1, 'MT003'),
+('00137', N'Giao thức SSH dùng port mặc định: _22|23|21|80', 1, 'MT003'),
+('00138', N'TLS cung cấp: _bảo mật kênh truyền|cân bằng tải|định tuyến|nén', 1, 'MT003'),
+('00139', N'Kỹ thuật QoS giúp: _ưu tiên lưu lượng quan trọng|mã hóa dữ liệu|tăng IP|giảm packet loss luôn luôn', 1, 'MT003'),
+('00140', N'NAT loại Port Address Translation (PAT) còn gọi là: _NAT Overload|Static NAT|Dynamic NAT|NAT44', 1, 'MT003'),
+('00141', N'Giao thức UDP phù hợp cho: _streaming, real-time apps|file transfer|email|web pages', 1, 'MT003'),
+('00142', N'Handshake TLS bắt đầu bằng: _ClientHello|ServerHello|Finished|Alert', 1, 'MT003'),
+('00143', N'ARP cache lưu: _mapping IP→MAC|mapping domain→IP|users|routes', 1, 'MT003'),
+('00144', N'Giao thức PPP thường dùng trên: _kết nối điểm-điểm (dial-up, PPPoE)|Wi-Fi|Ethernet LAN|Bluetooth', 1, 'MT003'),
+('00145', N'Stateful firewall theo dõi: _trạng thái kết nối|nội dung file|tốc độ mạng|DNS', 1, 'MT003'),
+('00146', N'Traffic shaping và policing khác nhau ở: _mục tiêu là QoS vs enforcement|không khác|cùng nhau|không dùng trong mạng', 1, 'MT003'),
+('00147', N'Giao thức RARP dùng để: _dịch MAC sang IP cũ (hiếm dùng)|dịch IP sang MAC|dịch domain|mã hóa', 1, 'MT003'),
+('00148', N'Network latency measured in: _milliseconds|bytes|bits|packets', 1, 'MT003'),
+('00149', N'ARP spoofing là kỹ thuật tấn công nhằm: _gian lận mapping IP-MAC|mã hóa|tạo VPN|định tuyến', 1, 'MT003'),
+('00150', N'Để kiểm tra port mở trên host có thể dùng: _nmap|ping|traceroute|ftp', 1, 'MT003'),
+
+-- MT004: Hóa (00151 - 00200)
+('00151', N'Nguyên tử của cùng một nguyên tố có cùng: _số proton|số neutron|khối lượng|điện tích âm', 1, 'MT004'),
+('00152', N'PTHH: H2 + O2 → H2O là phản ứng: _phản ứng oxi hóa khử|phản ứng acid-base|phản ứng trùng hợp|phản ứng thế', 1, 'MT004'),
+('00153', N'Đơn vị của nồng độ molarity là: _mol/L|g/L|mol|L', 1, 'MT004'),
+('00154', N'Liên kết ion hình thành giữa: _ion dương và ion âm|2 nguyên tử cùng độ điện âm|2 kim loại|2 phi kim', 1, 'MT004'),
+('00155', N'Phản ứng trung hòa giữa acid và base tạo thành: _muối và nước|khí và nước|rắn|oxy', 1, 'MT004'),
+('00156', N'Phân tử CH4 có hình dạng: _tứ diện đều (tetrahedral)|phẳng|vuông|lục giác', 1, 'MT004'),
+('00157', N'Độ ion hóa mạnh của acid so với acid yếu đo bằng: _pKa nhỏ hơn cho acid mạnh|pKa lớn hơn|không liên quan|pKa = 0', 1, 'MT004'),
+('00158', N'Trong phản ứng cộng (addition) của alkenes, tính chất chung là: _đôi liên kết đôi bị phá và nối thêm nhóm|tạo vòng|phân hủy|mất điện tích', 1, 'MT004'),
+('00159', N'Nguyên tố nào là kim loại kiềm: _Na|Cl|O|N', 1, 'MT004'),
+('00160', N'Định luật bảo toàn khối lượng của Lavoisier nói rằng: _tổng khối lượng trước = sau phản ứng|khối lượng giảm|khối lượng tăng|không liên quan', 1, 'MT004'),
+('00161', N'Phản ứng oxy hóa là: _mất electron|nhận electron|mất proton|nhận proton', 1, 'MT004'),
+('00162', N'Độ pH nước tinh khiết khoảng: _7|0|14|3', 1, 'MT004'),
+('00163', N'Vật chất đồng vị là: _các nguyên tử cùng Z nhưng khác A|cùng A khác Z|không giống nhau|không tồn tại', 1, 'MT004'),
+('00164', N'Phân tử nước có góc liên kết H-O-H xấp xỉ: _104.5°|90°|120°|180°', 1, 'MT004'),
+('00165', N'Trong chu trình pH, buffer dung dịch có khả năng: _ổn định pH khi thêm acid hoặc base|tăng pH mãi|làm mất pH|không thay đổi', 1, 'MT004'),
+('00166', N'Trong phản ứng SN1, bước quyết định tốc độ là: _tạo carbocation (bước phân ly)|tấn công nucleophile|tái tạo sản phẩm|cân bằng', 1, 'MT004'),
+('00167', N'Trong quang phổ, bước sóng ngắn hơn tương ứng với: _năng lượng cao hơn|năng lượng thấp hơn|không đổi|tốc độ thấp hơn', 1, 'MT004'),
+('00168', N'Kim loại chuyển tiếp thường có: _electron d bán đầy|electron s|electron p|không electron', 1, 'MT004'),
+('00169', N'Phản ứng esterification tạo ra: _ester và nước|acid và nước|alcohol và acid|muối', 1, 'MT004'),
+('00170', N'Phản ứng khử đồng nghĩa với: _nhận electron|mất electron|tăng pH|giảm pH', 1, 'MT004'),
+('00171', N'Đơn vị của hằng số cân bằng Kc phụ thuộc vào: _các phân tử tham gia nên có thể khác nhau|luôn là không có đơn vị|luôn mol/L|luôn mol', 1, 'MT004'),
+('00172', N'Trong cấu trúc Lewis, nguyên tử có xu hướng đạt: _quy tắc bát tử (8 electron) cho đa số|luôn 2 electron|luôn 4 electron|không có quy tắc', 1, 'MT004'),
+('00173', N'Đặc trưng của liên kết cộng hóa trị là: _chung cặp electron giữa hai nguyên tử|chuyển electron hoàn toàn|ion hóa|không liên quan', 1, 'MT004'),
+('00174', N'Trong phản ứng nhiệt phân, chất bị: _phân hủy do nhiệt|kết hợp với H2|không thay đổi|giảm kích thước', 1, 'MT004'),
+('00175', N'Phương pháp xác định cấu trúc phân tử phổ biến: _NMR|PCR|ELISA|Chromatography (lớp chung)', 1, 'MT004'),
+('00176', N'Khái niệm isomer là: _cùng công thức phân tử nhưng khác cấu trúc|khác công thức|giống hệt|không liên quan', 1, 'MT004'),
+('00177', N'Phản ứng cộng hydro (hydrogenation) thường có xúc tác: _Ni, Pt hoặc Pd|Fe|Cu|Ag', 1, 'MT004'),
+('00178', N'Trong hợp chất ion, điểm nóng chảy thường: _cao|thấp|rất thấp|không xác định', 1, 'MT004'),
+('00179', N'Khái niệm mol tương ứng với: _6.022e23 hạt|1 hạt|1000 hạt|1e6 hạt', 1, 'MT004'),
+('00180', N'Chuỗi đồng phân hoá hữu cơ phụ thuộc vào: _cấu trúc nối carbon|số nguyên tử oxy|khối lượng nguyên tử|điện tích', 1, 'MT004'),
+('00181', N'Trong dung dịch điện ly, chất điện li mạnh phân ly: _hoàn toàn thành ion|một phần|không|tuỳ pH', 1, 'MT004'),
+('00182', N'Định luật hành vi khí lý tưởng: PV = nRT, R là: _hằng số khí|biến số|tỷ lệ phần trăm|nhiệt độ', 1, 'MT004'),
+('00183', N'Phản ứng SN2 có đặc điểm: _bậc hai, tấn công nucleophile đồng thời với sự ra đi|qua carbocation|qua trung gian|kết hợp hai bước', 1, 'MT004'),
+('00184', N'Chất xúc tác làm: _tăng tốc phản ứng mà không bị tiêu thụ|tăng năng lượng kích hoạt|giảm sản phẩm|loại bỏ sản phẩm', 1, 'MT004'),
+('00185', N'Trong pH scale, acid mạnh có pH: _0-3|7-14|6-7|3-6', 1, 'MT004'),
+('00186', N'Tính chất điện ly của nước tinh khiết rất yếu do: _tự phân ly nước rất hạn chế|nhiều ion|điện áp|nhiệt', 1, 'MT004'),
+('00187', N'Kim loại kiềm thổ là nhóm: _Be, Mg, Ca...|Na, K|Cl, F|He, Ne', 1, 'MT004'),
+('00188', N'Trong hợp chất hữu cơ, chức -OH là nhóm: _hydroxyl|carboxyl|amino|carbonyl', 1, 'MT004'),
+('00189', N'Phương pháp sắc ký dùng để tách: _hỗn hợp thành các thành phần dựa trên tương tác|phân tích DNA|nuôi cấy|đo pH', 1, 'MT004'),
+('00190', N'Trong phản ứng oxi hóa khử, số oxi hóa của O thường là: _-2|+2|0|+1', 1, 'MT004'),
+('00191', N'Khái niệm "electronegativity" biểu thị: _khả năng hút electron trong liên kết|số electron|trọng lượng nguyên tử|độ dẻo', 1, 'MT004'),
+('00192', N'Trong phản ứng cộng halogen vào alkene, sản phẩm thường là: _dihalide vicinal|alcohol|amine|ketone', 1, 'MT004'),
+('00193', N'Phản ứng phân ly nhiệt của các muối sulfát thường tạo: _oxit và SO2|H2O|CO2|N2', 1, 'MT004'),
+('00194', N'Độ hòa tan của khí trong nước giảm khi: _nhiệt độ tăng|nhiệt độ giảm|áp suất giảm|không thay đổi', 1, 'MT004'),
+('00195', N'Trong phản ứng este hóa, xúc tác thông thường là: _acid mạnh (H2SO4)|base mạnh|kim loại|nước', 1, 'MT004'),
+('00196', N'Phản ứng oxy hóa khử điện hóa xảy ra trong: _pin điện|nồi hấp|lò nung|máy lạnh', 1, 'MT004'),
+('00197', N'Phân loại đồng vị phóng xạ dùng trong y học: _I-131 cho tuyến giáp|C-12|O-16|H-1', 1, 'MT004'),
+('00198', N'Trong hợp chất cộng hoá học, liên kết pi hình thành bởi: _chồng chập orbital p|orbital s|orbital d|ion', 1, 'MT004'),
+('00199', N'Khái niệm "Le Chatelier" áp dụng khi: _hệ ở cân bằng chịu thay đổi thì cân bằng dịch chuyển để chống lại thay đổi đó|không có thay đổi|hệ luôn cố định|hệ bị phá hủy', 1, 'MT004'),
+('00200', N'Trong phản ứng SN1, bước tạo carbocation bị ảnh hưởng mạnh bởi: _ổn định carbocation (cấu trúc cation)|nhiệt độ|màu sắc|áp suất', 1, 'MT004'),
+
+-- MT005: Sinh (00201 - 00250)
+('00201', N'Tế bào prokaryote khác eukaryote ở điểm: _không có nhân màng bao bọc|có nhân|phức tạp hơn|có ty thể', 1, 'MT005'),
+('00202', N'Chức năng chính của ty thể (mitochondria) là: _sản xuất ATP bằng hô hấp tế bào|tổng hợp protein|lưu trữ lipid|sản xuất lipid', 1, 'MT005'),
+('00203', N'Giai đoạn nào của nguyên phân tạo ra hai tế bào con giống hệt nhau: _G1, S, G2, M (Mitosis) chính là phân chia nhân và tế bào|only S|only G2|only G1', 4, 'MT005'),
+('00204', N'DNA được cấu tạo từ: _nucleotides gồm base, đường, phosphate|aminos|lipid|monosaccharide', 1, 'MT005'),
+('00205', N'Trong di truyền học, genotype là: _tập hợp allele của một cá thể|biểu hiện ra kiểu hình|môi trường|đột biến', 1, 'MT005'),
+('00206', N'Khi nói về enzyme, "substrate" là: _chất nền mà enzyme tác dụng lên|sản phẩm|enzyme khác|vitamin', 1, 'MT005'),
+('00207', N'Quá trình phiên mã (transcription) xảy ra ở: _nhân trong tế bào eukaryote|ty thể|ribosome|ngoài tế bào', 1, 'MT005'),
+('00208', N'Trong chuỗi thức ăn, sinh vật sản xuất chính là: _sinh vật tự dưỡng (producers)|ăn thịt|máy móc|kẻ ăn tạp', 1, 'MT005'),
+('00209', N'Phân loại Mendel: tính trạng trội là: _xuất hiện ở F1 khi lai hai dòng đồng hợp tử khác nhau|luôn biến mất|luôn lặn|không tồn tại', 1, 'MT005'),
+('00210', N'Quá trình quang hợp xảy ra chủ yếu ở: _lá, lục lạp (chloroplast)|rễ|cùi trái|hạt', 1, 'MT005'),
+('00211', N'ATP được gọi là: _đồng tiền năng lượng của tế bào|protein|lipid|carbohydrate', 1, 'MT005'),
+('00212', N'Hệ thống hô hấp ở người trao đổi khí chính ở: _phổi (alveoli)|thiết bị ngoài cơ thể|dạ dày|ruột', 1, 'MT005'),
+('00213', N'Hormone insulin do đâu tiết ra: _tuyến tụy (beta cells)|tuyến giáp|tuyến yên|thận', 1, 'MT005'),
+('00214', N'Mendelian inheritance: nếu allele A hoàn toàn trội so với a, F2 ratio sẽ là: _3:1 (phäenotype)|1:1|2:1|4:0', 1, 'MT005'),
+('00215', N'Genotype AaBb khi tự thụ phấn cho F2 sẽ cho tỷ lệ kiểu hình di truyền độc lập: _9:3:3:1|1:1|3:1|2:2', 1, 'MT005'),
+('00216', N'Trong hệ tuần hoàn người, tâm thất trái bơm máu đến: _toàn thân (hệ tuần hoàn hệ thống)|phổi|tim phải|não', 1, 'MT005'),
+('00217', N'Cell membrane được cấu tạo chủ yếu từ: _phospholipid bilayer|cellulose|peptidoglycan|chitin', 1, 'MT005'),
+('00218', N'Quá trình phân bào giảm nhiễm (meiosis) tạo ra: _germ cells haploid|somatic cells diploid|clone|identical', 1, 'MT005'),
+('00219', N'Trong hệ miễn dịch, kháng thể (antibody) do: _tế bào B sản xuất|tế bào T sản xuất|hồng cầu|tế bào mast', 1, 'MT005'),
+('00220', N'ARN thông tin (mRNA) có chức năng: _mang mã di truyền từ DNA tới ribosome|mang aa|tạo màng|lưu trữ năng lượng', 1, 'MT005'),
+('00221', N'Photosystem trong quang hợp chứa: _chlorophyll để bắt ánh sáng|hemoglobin|protein tiêu hóa|RNA', 1, 'MT005'),
+('00222', N'Trong hệ thần kinh, synapse là nơi: _truyền tín hiệu giữa hai tế bào thần kinh|tạo hồng cầu|tiết hormone|tiêu hoá', 1, 'MT005'),
+('00223', N'Khái niệm "homeostasis" là: _ổn định môi trường trong cơ thể|tăng trưởng|chết tế bào|đột biến', 1, 'MT005'),
+('00224', N'Ở cấp độ quần thể, "độ phong phú loài" (species richness) đo: _số lượng loài trong một khu vực|số cá thể|biomass|năng suất', 1, 'MT005'),
+('00225', N'Genetic mutation có thể xảy ra do: _sai sót sao chép DNA hoặc tác nhân môi trường|luôn do di truyền|không xảy ra|chỉ xảy ra ở thực vật', 1, 'MT005'),
+('00226', N'Trong quá trình dịch mã (translation), ribosome dùng: _mRNA và tRNA để lắp ghép amino acids|DNA|lipid|carbohydrate', 1, 'MT005'),
+('00227', N'Trong hệ sinh thái, chuỗi thức ăn bắt đầu bằng: _sinh vật tự dưỡng|động vật ăn thịt|sâu bọ|chất hữu cơ', 1, 'MT005'),
+('00228', N'Khái niệm di truyền liên kết trên cùng một nhiễm sắc thể do: _genes gần nhau ít xảy ra crossing-over|genes xa hơn liên kết mạnh|không liên quan|luôn độc lập', 1, 'MT005'),
+('00229', N'Tế bào hồng cầu ở người không có: _nhân|ty thể|ribosome|màng tế bào', 1, 'MT005'),
+('00230', N'Ở thực vật, quá trình vận chuyển nước từ rễ lên lá dựa vào: _áp suất rễ, sức căng mặt trong mạch dẫn và bốc hơi nước (transpiration)|vận chuyển chủ động duy nhất|máy bơm|tĩnh mạch', 1, 'MT005'),
+('00231', N'Mendel''s law of segregation nói rằng: _các allele tách ra trong tạo giao tử|luôn kết hợp|không tách|phải có môi trường', 1, 'MT005'),
+('00232', N'Trong sinh học phân tử, PCR dùng để: _khuếch đại đoạn DNA cụ thể|dịch mã RNA|tạo protein|phân hủy lipid', 1, 'MT005'),
+('00233', N'Khái niệm "fitness" trong tiến hoá đề cập đến: _khả năng sinh sản tương đối của cá thể|sức mạnh|tuổi thọ|kích thước', 1, 'MT005'),
+('00234', N'Enzyme hoạt động tối ưu ở: _điều kiện pH và nhiệt độ đặc trưng|mọi điều kiện|luôn pH 7|luôn 100°C', 1, 'MT005'),
+('00235', N'Ở cấp phân tử, lipid là phân tử chủ yếu cấu tạo nên: _màng tế bào|DNA|protein|carbohydrate', 1, 'MT005'),
+('00236', N'Tại sao chlorophyll có màu xanh? _vì hấp thụ ánh sáng đỏ và xanh lam, phản xạ xanh|vì phản xạ đỏ|vì không hấp thụ|vì ánh sáng yếu', 1, 'MT005'),
+('00237', N'Trong miễn dịch học, vaccine kích thích: _một đáp ứng miễn dịch đặc hiệu và tạo nhớ miễn dịch|gây bệnh luôn|làm vô hiệu hệ miễn dịch|không tác dụng', 1, 'MT005'),
+('00238', N'Trong sinh sản hữu tính, sự đa dạng di truyền tăng nhờ: _crossing-over và phân ly độc lập|sinh sản vô tính|không có biến đổi|một cá thể', 1, 'MT005'),
+('00239', N'Quá trình apooptosis là: _chết tế bào theo chương trình|phân bào|sinh sản|tiêu hoá', 1, 'MT005'),
+('00240', N'Ở động vật, hệ tiết niệu chính để: _lọc và loại bỏ chất thải, điều hòa nước và điện giải|tiêu hóa|tuần hoàn|hô hấp', 1, 'MT005'),
+('00241', N'Chất dinh dưỡng vi lượng cần ở mức rất nhỏ nhưng: _cần cho chức năng sinh học|không cần|cần nhiều|cần để tạo năng lượng chính', 1, 'MT005'),
+('00242', N'Quá trình tiêu hóa bắt đầu ở: _miệng với enzym amylase trong nước bọt|dạ dày|ruột non|thực quản', 1, 'MT005'),
+('00243', N'Ở cấp tế bào, "signal transduction" là: _con đường truyền tín hiệu từ receptor tới response|dòng máu|tình trạng dinh dưỡng|vận chuyển ion', 1, 'MT005'),
+('00244', N'Khái niệm "ecological niche" là: _vị trí và vai trò sinh thái của loài trong hệ sinh thái|vị trí địa lý thuần túy|độ tuổi|màu sắc', 1, 'MT005'),
+('00245', N'Trong di truyền học phân tử, mã di truyền đọc theo bộ ba nucleotide gọi là: _codon|anticodon|gene|locus', 1, 'MT005'),
+('00246', N'Quá trình tổng hợp protein xảy ra ở: _ribosome|ty thể|thiết bị Golgi|peroxisome', 1, 'MT005'),
+('00247', N'Ở cấp quần thể, growth rate phụ thuộc vào: _birth rate và death rate|màu sắc|kích thước cá thể|sức khỏe trung bình', 1, 'MT005'),
+('00248', N'Kháng sinh thường tác động lên: _vi khuẩn nhưng không phải virus|virus|nấm|tất cả', 1, 'MT005'),
+('00249', N'Ở hệ miễn dịch, tế bào T cytotoxic tiêu diệt: _tế bào bị nhiễm virus hoặc tế bào ung thư|vi khuẩn ngoài tế bào|sinh vật phù du|hồng cầu', 1, 'MT005'),
+('00250', N'Trong tiến hóa, selection pressure là yếu tố: _ảnh hưởng đến fitness và tần suất allele trong quần thể|không liên quan|luôn xấu|luôn tốt', 1, 'MT005')
+;
+go
+-- Gán DapAn = ((IdNumber-1) % 4) + 1 cho các môn MT001..MT005
+UPDATE CauHoi
+SET DapAn = ((CAST(RIGHT(Id,5) AS INT) - 1) % 4) + 1
+WHERE MaMon IN ('MT001','MT002','MT003','MT004','MT005');
+go
+
+-- mock user
+
+insert into Users values (
+    '2001230328',
+	'Quang Nhat Hung',
+	'Quangnhathung',
+	N'Nam',
+	'Student',
+	'2005/5/11',
+	'14DHTH07',
+	'0838557433'
+);
