@@ -63,9 +63,9 @@ namespace QuizMe
             this.lblWelcome.Location = new System.Drawing.Point(53, 240);
             this.lblWelcome.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(258, 37);
+            this.lblWelcome.Size = new System.Drawing.Size(249, 37);
             this.lblWelcome.TabIndex = 0;
-            this.lblWelcome.Text = "Chào mừng trở lại!";
+            this.lblWelcome.Text = "Chào mừng trở lại";
             // 
             // lblTitle
             // 

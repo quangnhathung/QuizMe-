@@ -12,7 +12,7 @@ namespace QuizMe
         public static string Ten { get; set; }
         public static string Role { get; set; }
         public static string Gender { get; set; }
-        public static string Dob { get; set; }
+        public static DateTime? Dob { get; set; }
         public static string Phone { get; set; }
         public static string MaLop { get; set; }
 

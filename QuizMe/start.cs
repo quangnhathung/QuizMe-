@@ -27,11 +27,8 @@ namespace QuizMe
         {
 
             Register registerForm = new Register();
-
-            // Khi form đăng ký đóng → hiện lại form đăng nhập
             registerForm.FormClosed += (s, args) => this.Show();
-
-            this.Hide();   // ẩn form đăng nhập
+            this.Hide();
             registerForm.Show();
         }
 
@@ -42,28 +39,47 @@ namespace QuizMe
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            SqlConnection db = Data.GetConnection();
-
-            db.Open();
-            string Id = txtUsername.Text;
-            string pass = txtPassword.Text;
-
-            string query = $"Select * from Users where Uid = '{Id}' and Password = '{pass}'";
-            SqlCommand cmd = new SqlCommand(query, db);
-            SqlDataReader reader = cmd.ExecuteReader(); if (reader.Read())
+            using (SqlConnection db = Data.GetConnection())
             {
-                string tenUser = reader["Ten"].ToString();
-                string role = reader["Role"].ToString();
+                string Id = txtUsername.Text;
+                string pass = txtPassword.Text;
+                if (!Id.All(c => char.IsDigit(c)))
+                {
+                    Utilities.MessageBoxWarning("Mã số sinh viên không hợp lệ!");
+                }
 
-                MessageBox.Show("Đăng nhập thành công! Xin chào " + tenUser);
-                //home main = new home(); // ví dụ mở form chính
-                //main.Show();
+                string query = $"Select * from Users where Uid = '{Id}' and Password = '{pass}'";
+                SqlCommand cmd = new SqlCommand(query, db);
+
+                db.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        UserStorage.Uid = reader["Uid"].ToString();
+                        UserStorage.Ten = reader["Ten"].ToString();
+                        UserStorage.Role = reader["Role"].ToString();
+                        UserStorage.Gender = reader["GioiTinh"].ToString();
+                        UserStorage.Phone = reader["Phone"].ToString();
+                        UserStorage.Dob = reader["Ngaysinh"] as DateTime?;
+
+                        if (UserStorage.Role == "Student")
+                        {
+                            home HomeForm = new home();
+                            HomeForm.Show();
+                            this.Hide();
+                        }
+                        else Utilities.MessageBoxInfor($"{UserStorage.Role} User hiện tại thuộc admin hoặc giảng viên!");
+                        
+
+                    }
+                    else
+                    {
+                        Utilities.MessageBoxError("Sai tài khoản hoặc mật khẩu!");
+                    }
+                }
+
             }
-            else
-            {
-                MessageBox.Show("Sai tài khoản hoặc mật khẩu!");
-            }
-            db.Close();
         }
     }
 }

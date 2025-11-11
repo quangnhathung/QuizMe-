@@ -14,7 +14,7 @@ create table Users(
 	Ten Nvarchar(100),
 	Password char(18),
 	GioiTinh nvarchar(5),
-	Role char(30),
+	Role varchar(30),
 	Ngaysinh datetime,
 	MaLop char(10),
 	Phone char(10),
