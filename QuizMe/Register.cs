@@ -49,7 +49,7 @@ namespace QuizMe
                     Utilities.MessageBoxWarning("Mật khẩu xác nhận không khớp!");
                     return;
                 }
-                string query = $"insert into Users(Uid, Ten, Password) values ('{Id}','{name}','{pass}')";
+                string query = $"insert into Users(Uid, Ten, Password) values ('{Id}','{name}' ,'{pass}')";
                 SqlCommand cmd = new SqlCommand(query, db);
 
                 db.Open();

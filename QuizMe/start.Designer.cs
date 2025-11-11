@@ -30,6 +30,7 @@ namespace QuizMe
         private void InitializeComponent()
         {
             this.panelBanner = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.lblWelcome = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblUsername = new System.Windows.Forms.Label();
@@ -39,7 +40,7 @@ namespace QuizMe
             this.btnLogin = new System.Windows.Forms.Button();
             this.linkRegister = new System.Windows.Forms.LinkLabel();
             this.btnClose = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblinkForgot = new System.Windows.Forms.LinkLabel();
             this.panelBanner.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,6 +55,19 @@ namespace QuizMe
             this.panelBanner.Name = "panelBanner";
             this.panelBanner.Size = new System.Drawing.Size(400, 554);
             this.panelBanner.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(119, 283);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(131, 37);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Quiz Me!";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // lblWelcome
             // 
@@ -143,7 +157,7 @@ namespace QuizMe
             this.linkRegister.AutoSize = true;
             this.linkRegister.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.linkRegister.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(144)))), ((int)(((byte)(255)))));
-            this.linkRegister.Location = new System.Drawing.Point(573, 443);
+            this.linkRegister.Location = new System.Drawing.Point(573, 345);
             this.linkRegister.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkRegister.Name = "linkRegister";
             this.linkRegister.Size = new System.Drawing.Size(193, 20);
@@ -167,18 +181,19 @@ namespace QuizMe
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // label1
+            // lblinkForgot
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(119, 283);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(131, 37);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Quiz Me!";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.lblinkForgot.AutoSize = true;
+            this.lblinkForgot.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblinkForgot.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(144)))), ((int)(((byte)(255)))));
+            this.lblinkForgot.Location = new System.Drawing.Point(607, 431);
+            this.lblinkForgot.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblinkForgot.Name = "lblinkForgot";
+            this.lblinkForgot.Size = new System.Drawing.Size(120, 20);
+            this.lblinkForgot.TabIndex = 9;
+            this.lblinkForgot.TabStop = true;
+            this.lblinkForgot.Text = "Quên Mật khẩu ?";
+            this.lblinkForgot.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblinkForgot_LinkClicked);
             // 
             // start
             // 
@@ -186,6 +201,7 @@ namespace QuizMe
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(933, 554);
+            this.Controls.Add(this.lblinkForgot);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.linkRegister);
             this.Controls.Add(this.btnLogin);
@@ -220,6 +236,7 @@ namespace QuizMe
         private System.Windows.Forms.LinkLabel linkRegister;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.LinkLabel lblinkForgot;
     }
 }
 

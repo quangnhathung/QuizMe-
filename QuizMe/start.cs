@@ -82,5 +82,13 @@ namespace QuizMe
 
             }
         }
+
+        private void lblinkForgot_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Forgot Form = new Forgot();
+            Form.FormClosed += (s, args) => this.Show();
+            this.Hide();
+            Form.Show();
+        }
     }
 }
