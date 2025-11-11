@@ -12,7 +12,7 @@ go
 create table Users(
 	Uid char(10) primary key,
 	Ten Nvarchar(100),
-	Password char(18),
+	Password varchar(18),
 	GioiTinh nvarchar(5),
 	Role varchar(30),
 	Ngaysinh datetime,
@@ -109,6 +109,22 @@ BEGIN
         ON k.MaMon = i.MaMon
        AND k.MaSinhVien = i.MaSinhVien
     WHERE k.MaMon IS NULL;
+END;
+GO
+
+GO
+CREATE TRIGGER trg_Users_DefaultRole
+ON Users
+AFTER INSERT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    UPDATE U
+    SET U.Role = 'Student'
+    FROM Users U
+    INNER JOIN inserted I ON U.Uid = I.Uid
+    WHERE (I.Role IS NULL OR I.Role = '');
 END;
 GO
 

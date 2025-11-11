@@ -46,6 +46,7 @@ namespace QuizMe
                 if (!Id.All(c => char.IsDigit(c)))
                 {
                     Utilities.MessageBoxWarning("Mã số sinh viên không hợp lệ!");
+                    return;
                 }
 
                 string query = $"Select * from Users where Uid = '{Id}' and Password = '{pass}'";
