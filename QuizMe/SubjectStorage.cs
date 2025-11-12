@@ -29,6 +29,32 @@ namespace QuizMe
             this.SoCauHoi = 0;
         }
     }
+    public class Question
+    {
+        public string CauHoi { get; set; }
+        public List<string> LuaChon { get; set; } = new List<string>();
+        public int DapAn { get; set; }
+
+        public Question(string rawData)
+        {
+            if (string.IsNullOrWhiteSpace(rawData))
+                throw new ArgumentException("Chuỗi dữ liệu câu hỏi không hợp lệ!");
+
+            var parts = rawData.Split('_');
+
+            CauHoi = parts[0].Trim();
+
+            if (parts.Length > 1)
+            {
+                LuaChon = parts[1]
+                    .Split('|')
+                    .Select(opt => opt.Replace("''", "'").Trim())
+                    .ToList();
+            }
+
+            DapAn = 1;
+        }
+    }
     class SubjectStorage
     {
         public static List<Subject> Subjects = new List<Subject>();

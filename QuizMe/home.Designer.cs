@@ -35,6 +35,13 @@ namespace QuizMe
             this.btnMinimize = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.pnlSidebar = new System.Windows.Forms.Panel();
+            this.lbDob = new System.Windows.Forms.Label();
+            this.lbGioitinh = new System.Windows.Forms.Label();
+            this.lbMalop = new System.Windows.Forms.Label();
+            this.LbUid = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnLogout = new System.Windows.Forms.Button();
             this.lblUserEmail = new System.Windows.Forms.Label();
             this.lblUserName = new System.Windows.Forms.Label();
@@ -42,13 +49,6 @@ namespace QuizMe
             this.lblSelectTitle = new System.Windows.Forms.Label();
             this.cmbSubjects = new System.Windows.Forms.ComboBox();
             this.btnStartExam = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.lbDob = new System.Windows.Forms.Label();
-            this.lbGioitinh = new System.Windows.Forms.Label();
-            this.lbMalop = new System.Windows.Forms.Label();
-            this.LbUid = new System.Windows.Forms.Label();
             this.pnlHeader.SuspendLayout();
             this.pnlSidebar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picAvatar)).BeginInit();
@@ -62,7 +62,7 @@ namespace QuizMe
             this.pnlHeader.Controls.Add(this.btnClose);
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlHeader.Location = new System.Drawing.Point(0, 0);
-            this.pnlHeader.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlHeader.Margin = new System.Windows.Forms.Padding(4);
             this.pnlHeader.Name = "pnlHeader";
             this.pnlHeader.Size = new System.Drawing.Size(1135, 74);
             this.pnlHeader.TabIndex = 0;
@@ -87,7 +87,7 @@ namespace QuizMe
             this.btnMinimize.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMinimize.ForeColor = System.Drawing.Color.White;
             this.btnMinimize.Location = new System.Drawing.Point(1028, 0);
-            this.btnMinimize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnMinimize.Margin = new System.Windows.Forms.Padding(4);
             this.btnMinimize.Name = "btnMinimize";
             this.btnMinimize.Size = new System.Drawing.Size(53, 49);
             this.btnMinimize.TabIndex = 1;
@@ -103,7 +103,7 @@ namespace QuizMe
             this.btnClose.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.ForeColor = System.Drawing.Color.White;
             this.btnClose.Location = new System.Drawing.Point(1082, 0);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(4);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(53, 49);
             this.btnClose.TabIndex = 0;
@@ -127,137 +127,10 @@ namespace QuizMe
             this.pnlSidebar.Controls.Add(this.picAvatar);
             this.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlSidebar.Location = new System.Drawing.Point(0, 74);
-            this.pnlSidebar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlSidebar.Margin = new System.Windows.Forms.Padding(4);
             this.pnlSidebar.Name = "pnlSidebar";
             this.pnlSidebar.Size = new System.Drawing.Size(333, 524);
             this.pnlSidebar.TabIndex = 1;
-            // 
-            // btnLogout
-            // 
-            this.btnLogout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnLogout.FlatAppearance.BorderSize = 0;
-            this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogout.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogout.ForeColor = System.Drawing.Color.Red;
-            this.btnLogout.Location = new System.Drawing.Point(33, 450);
-            this.btnLogout.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(267, 49);
-            this.btnLogout.TabIndex = 3;
-            this.btnLogout.Text = "Đăng xuất";
-            this.btnLogout.UseVisualStyleBackColor = true;
-            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
-            // 
-            // lblUserEmail
-            // 
-            this.lblUserEmail.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUserEmail.ForeColor = System.Drawing.Color.DimGray;
-            this.lblUserEmail.Location = new System.Drawing.Point(29, 233);
-            this.lblUserEmail.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblUserEmail.Name = "lblUserEmail";
-            this.lblUserEmail.Size = new System.Drawing.Size(83, 25);
-            this.lblUserEmail.TabIndex = 2;
-            this.lblUserEmail.Text = "Mã số:";
-            this.lblUserEmail.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblUserEmail.Click += new System.EventHandler(this.lblUserEmail_Click);
-            // 
-            // lblUserName
-            // 
-            this.lblUserName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUserName.Location = new System.Drawing.Point(16, 178);
-            this.lblUserName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(301, 28);
-            this.lblUserName.TabIndex = 1;
-            this.lblUserName.Text = "[Tên Sinh Viên]";
-            this.lblUserName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // picAvatar
-            // 
-            this.picAvatar.BackColor = System.Drawing.Color.Gainsboro;
-            this.picAvatar.Image = ((System.Drawing.Image)(resources.GetObject("picAvatar.Image")));
-            this.picAvatar.Location = new System.Drawing.Point(87, 14);
-            this.picAvatar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.picAvatar.Name = "picAvatar";
-            this.picAvatar.Size = new System.Drawing.Size(160, 160);
-            this.picAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picAvatar.TabIndex = 0;
-            this.picAvatar.TabStop = false;
-            // 
-            // lblSelectTitle
-            // 
-            this.lblSelectTitle.AutoSize = true;
-            this.lblSelectTitle.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSelectTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblSelectTitle.Location = new System.Drawing.Point(413, 197);
-            this.lblSelectTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblSelectTitle.Name = "lblSelectTitle";
-            this.lblSelectTitle.Size = new System.Drawing.Size(376, 46);
-            this.lblSelectTitle.TabIndex = 2;
-            this.lblSelectTitle.Text = "Vui lòng chọn môn thi";
-            // 
-            // cmbSubjects
-            // 
-            this.cmbSubjects.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSubjects.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbSubjects.FormattingEnabled = true;
-            this.cmbSubjects.Location = new System.Drawing.Point(420, 271);
-            this.cmbSubjects.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.cmbSubjects.Name = "cmbSubjects";
-            this.cmbSubjects.Size = new System.Drawing.Size(636, 39);
-            this.cmbSubjects.TabIndex = 3;
-            // 
-            // btnStartExam
-            // 
-            this.btnStartExam.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(144)))), ((int)(((byte)(255)))));
-            this.btnStartExam.FlatAppearance.BorderSize = 0;
-            this.btnStartExam.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStartExam.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStartExam.ForeColor = System.Drawing.Color.White;
-            this.btnStartExam.Location = new System.Drawing.Point(582, 369);
-            this.btnStartExam.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnStartExam.Name = "btnStartExam";
-            this.btnStartExam.Size = new System.Drawing.Size(267, 62);
-            this.btnStartExam.TabIndex = 4;
-            this.btnStartExam.Text = "VÀO THI";
-            this.btnStartExam.UseVisualStyleBackColor = false;
-            this.btnStartExam.Click += new System.EventHandler(this.btnStartExam_Click);
-            // 
-            // label1
-            // 
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.DimGray;
-            this.label1.Location = new System.Drawing.Point(29, 268);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(83, 25);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Lớp:";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label2
-            // 
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.DimGray;
-            this.label2.Location = new System.Drawing.Point(29, 303);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(83, 25);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Giới tính:";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label3
-            // 
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.DimGray;
-            this.label3.Location = new System.Drawing.Point(29, 338);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(83, 25);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Ngày sinh:";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lbDob
             // 
@@ -307,6 +180,133 @@ namespace QuizMe
             this.LbUid.Text = "-----";
             this.LbUid.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // label3
+            // 
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.DimGray;
+            this.label3.Location = new System.Drawing.Point(29, 338);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(83, 25);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Ngày sinh:";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.DimGray;
+            this.label2.Location = new System.Drawing.Point(29, 303);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(83, 25);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Giới tính:";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.DimGray;
+            this.label1.Location = new System.Drawing.Point(29, 268);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(83, 25);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Lớp:";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // btnLogout
+            // 
+            this.btnLogout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnLogout.FlatAppearance.BorderSize = 0;
+            this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogout.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogout.ForeColor = System.Drawing.Color.Red;
+            this.btnLogout.Location = new System.Drawing.Point(33, 450);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(4);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(267, 49);
+            this.btnLogout.TabIndex = 3;
+            this.btnLogout.Text = "Đăng xuất";
+            this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            // 
+            // lblUserEmail
+            // 
+            this.lblUserEmail.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUserEmail.ForeColor = System.Drawing.Color.DimGray;
+            this.lblUserEmail.Location = new System.Drawing.Point(29, 233);
+            this.lblUserEmail.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblUserEmail.Name = "lblUserEmail";
+            this.lblUserEmail.Size = new System.Drawing.Size(83, 25);
+            this.lblUserEmail.TabIndex = 2;
+            this.lblUserEmail.Text = "Mã số:";
+            this.lblUserEmail.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblUserEmail.Click += new System.EventHandler(this.lblUserEmail_Click);
+            // 
+            // lblUserName
+            // 
+            this.lblUserName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUserName.Location = new System.Drawing.Point(16, 178);
+            this.lblUserName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblUserName.Name = "lblUserName";
+            this.lblUserName.Size = new System.Drawing.Size(301, 28);
+            this.lblUserName.TabIndex = 1;
+            this.lblUserName.Text = "[Tên Sinh Viên]";
+            this.lblUserName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // picAvatar
+            // 
+            this.picAvatar.BackColor = System.Drawing.Color.Gainsboro;
+            this.picAvatar.Image = ((System.Drawing.Image)(resources.GetObject("picAvatar.Image")));
+            this.picAvatar.Location = new System.Drawing.Point(72, 14);
+            this.picAvatar.Margin = new System.Windows.Forms.Padding(4);
+            this.picAvatar.Name = "picAvatar";
+            this.picAvatar.Size = new System.Drawing.Size(175, 160);
+            this.picAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picAvatar.TabIndex = 0;
+            this.picAvatar.TabStop = false;
+            // 
+            // lblSelectTitle
+            // 
+            this.lblSelectTitle.AutoSize = true;
+            this.lblSelectTitle.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSelectTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblSelectTitle.Location = new System.Drawing.Point(413, 197);
+            this.lblSelectTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSelectTitle.Name = "lblSelectTitle";
+            this.lblSelectTitle.Size = new System.Drawing.Size(376, 46);
+            this.lblSelectTitle.TabIndex = 2;
+            this.lblSelectTitle.Text = "Vui lòng chọn môn thi";
+            // 
+            // cmbSubjects
+            // 
+            this.cmbSubjects.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSubjects.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbSubjects.FormattingEnabled = true;
+            this.cmbSubjects.Location = new System.Drawing.Point(420, 271);
+            this.cmbSubjects.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbSubjects.Name = "cmbSubjects";
+            this.cmbSubjects.Size = new System.Drawing.Size(636, 39);
+            this.cmbSubjects.TabIndex = 3;
+            // 
+            // btnStartExam
+            // 
+            this.btnStartExam.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(144)))), ((int)(((byte)(255)))));
+            this.btnStartExam.FlatAppearance.BorderSize = 0;
+            this.btnStartExam.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStartExam.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStartExam.ForeColor = System.Drawing.Color.White;
+            this.btnStartExam.Location = new System.Drawing.Point(582, 369);
+            this.btnStartExam.Margin = new System.Windows.Forms.Padding(4);
+            this.btnStartExam.Name = "btnStartExam";
+            this.btnStartExam.Size = new System.Drawing.Size(267, 62);
+            this.btnStartExam.TabIndex = 4;
+            this.btnStartExam.Text = "VÀO THI";
+            this.btnStartExam.UseVisualStyleBackColor = false;
+            this.btnStartExam.Click += new System.EventHandler(this.btnStartExam_Click);
+            // 
             // home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -319,7 +319,7 @@ namespace QuizMe
             this.Controls.Add(this.pnlSidebar);
             this.Controls.Add(this.pnlHeader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "home";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmMain";

@@ -84,8 +84,16 @@ namespace QuizMe
             Subject Choose_subject = new Subject();
 
             Subject choose_subject = SubjectStorage.Subjects.FirstOrDefault(item => item.MaMon == SelectedIdSubject);
-            if (choose_subject != null) {
+            if (choose_subject == null)
+            {
                 Utilities.MessageBoxError("Câu hỏi hiện không tìm thấy, vui lòng thử lại sau!");
+            }
+            else
+            {
+                SubjectStorage.CurrentSubject = choose_subject;
+                Exercise form = new Exercise();
+                this.Hide();
+                form.Show();
             }
         }
     }
