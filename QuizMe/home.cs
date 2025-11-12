@@ -29,6 +29,8 @@ namespace QuizMe
 
         private void Load_Subject()
         {
+            cmbSubjects.Items.Clear();
+            SubjectStorage.Clear();
             using (SqlConnection db = Data.GetConnection())
             {
                 string query = $"Select Id, Name, SoCauHoi, ThoiGianThi from MonThi";

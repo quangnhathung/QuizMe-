@@ -68,5 +68,10 @@ namespace QuizMe
         {
             CurrentSubject = a;
         }
+
+        public static void Clear()
+        {
+            Subjects.Clear();
+        }
     }
 }
