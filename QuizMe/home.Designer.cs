@@ -221,6 +221,7 @@ namespace QuizMe
             this.btnStartExam.TabIndex = 4;
             this.btnStartExam.Text = "VÀO THI";
             this.btnStartExam.UseVisualStyleBackColor = false;
+            this.btnStartExam.Click += new System.EventHandler(this.btnStartExam_Click);
             // 
             // label1
             // 

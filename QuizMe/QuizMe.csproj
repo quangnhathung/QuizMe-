@@ -53,6 +53,12 @@
       <DependentUpon>ChangePassword.cs</DependentUpon>
     </Compile>
     <Compile Include="Data.cs" />
+    <Compile Include="Exercise.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Exercise.Designer.cs">
+      <DependentUpon>Exercise.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forgot.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +91,9 @@
     <Compile Include="Utilities.cs" />
     <EmbeddedResource Include="ChangePassword.resx">
       <DependentUpon>ChangePassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Exercise.resx">
+      <DependentUpon>Exercise.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forgot.resx">
       <DependentUpon>Forgot.cs</DependentUpon>

@@ -32,10 +32,15 @@ namespace QuizMe
     class SubjectStorage
     {
         public static List<Subject> Subjects = new List<Subject>();
-
+        public static Subject CurrentSubject = new Subject();
         public static void Add(Subject item)
         {
             Subjects.Add(item);
+        }
+
+        public static void Choose(Subject a)
+        {
+            CurrentSubject = a;
         }
     }
 }

@@ -39,7 +39,7 @@ namespace QuizMe
                 {
                     while (reader.Read())
                     {
-                        Subject Subject_item  = new Subject();
+                        Subject Subject_item = new Subject();
                         Subject_item.MaMon = reader["Id"].ToString();
                         Subject_item.TenMonHoc = reader["Name"].ToString();
                         Subject_item.SoCauHoi = Convert.ToInt32(reader["SoCauHoi"]);
@@ -75,7 +75,18 @@ namespace QuizMe
 
         private void btnMinimize_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void btnStartExam_Click(object sender, EventArgs e)
+        {
+            string SelectedIdSubject = cmbSubjects.SelectedValue.ToString();
+            Subject Choose_subject = new Subject();
+
+            Subject choose_subject = SubjectStorage.Subjects.FirstOrDefault(item => item.MaMon == SelectedIdSubject);
+            if (choose_subject != null) {
+                Utilities.MessageBoxError("Câu hỏi hiện không tìm thấy, vui lòng thử lại sau!");
+            }
         }
     }
 }
