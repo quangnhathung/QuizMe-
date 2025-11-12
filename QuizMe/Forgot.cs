@@ -80,5 +80,10 @@ namespace QuizMe
                 form.Show();
             }
         }
+
+        private void lblTitle_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

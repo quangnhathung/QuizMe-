@@ -63,6 +63,7 @@ namespace QuizMe
                         UserStorage.Gender = reader["GioiTinh"].ToString();
                         UserStorage.Phone = reader["Phone"].ToString();
                         UserStorage.Dob = reader["Ngaysinh"] as DateTime?;
+                        UserStorage.MaLop = reader["Malop"].ToString();
 
                         if (UserStorage.Role == "Student")
                         {

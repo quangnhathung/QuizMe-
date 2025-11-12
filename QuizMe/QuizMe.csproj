@@ -80,6 +80,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SubjectStorage.cs" />
     <Compile Include="UserStorage.cs" />
     <Compile Include="Utilities.cs" />
     <EmbeddedResource Include="ChangePassword.resx">
@@ -120,6 +121,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\Avatar.png" />
     <Content Include="query.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

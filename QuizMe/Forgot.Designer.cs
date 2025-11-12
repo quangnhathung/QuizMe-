@@ -48,7 +48,7 @@ namespace QuizMe
             this.panelBanner.Controls.Add(this.lblWelcome);
             this.panelBanner.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelBanner.Location = new System.Drawing.Point(0, 0);
-            this.panelBanner.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelBanner.Margin = new System.Windows.Forms.Padding(4);
             this.panelBanner.Name = "panelBanner";
             this.panelBanner.Size = new System.Drawing.Size(400, 492);
             this.panelBanner.TabIndex = 0;
@@ -76,6 +76,7 @@ namespace QuizMe
             this.lblTitle.Size = new System.Drawing.Size(308, 46);
             this.lblTitle.TabIndex = 1;
             this.lblTitle.Text = "QUÊN MẬT KHẨU";
+            this.lblTitle.Click += new System.EventHandler(this.lblTitle_Click);
             // 
             // lblUsername
             // 
@@ -93,7 +94,7 @@ namespace QuizMe
             // 
             this.txtUsername.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUsername.Location = new System.Drawing.Point(467, 191);
-            this.txtUsername.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtUsername.Margin = new System.Windows.Forms.Padding(4);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(399, 34);
             this.txtUsername.TabIndex = 3;
@@ -102,7 +103,7 @@ namespace QuizMe
             // 
             this.txtPhone.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPhone.Location = new System.Drawing.Point(467, 283);
-            this.txtPhone.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPhone.Margin = new System.Windows.Forms.Padding(4);
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(399, 34);
             this.txtPhone.TabIndex = 5;
@@ -127,7 +128,7 @@ namespace QuizMe
             this.btnConfirm.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConfirm.ForeColor = System.Drawing.Color.White;
             this.btnConfirm.Location = new System.Drawing.Point(467, 369);
-            this.btnConfirm.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnConfirm.Margin = new System.Windows.Forms.Padding(4);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(400, 49);
             this.btnConfirm.TabIndex = 6;
@@ -156,7 +157,7 @@ namespace QuizMe
             this.btnClose.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.ForeColor = System.Drawing.Color.Gray;
             this.btnClose.Location = new System.Drawing.Point(880, 0);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(4);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(53, 49);
             this.btnClose.TabIndex = 8;
@@ -180,7 +181,7 @@ namespace QuizMe
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.panelBanner);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Forgot";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmForgotPassword";

@@ -428,7 +428,7 @@ insert into Users values (
 	'Quangnhathung',
 	N'Nam',
 	'Student',
-	'2005/5/11',
+	'2005/05/11',
 	'14DHTH07',
 	'0838557433'
 );
