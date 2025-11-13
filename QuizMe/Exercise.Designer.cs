@@ -345,13 +345,12 @@ namespace QuizMe
             // 
             // rbOptionA
             // 
-            this.rbOptionA.AutoSize = true;
             this.rbOptionA.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbOptionA.Location = new System.Drawing.Point(4, 29);
             this.rbOptionA.Margin = new System.Windows.Forms.Padding(4);
             this.rbOptionA.Name = "rbOptionA";
             this.rbOptionA.Padding = new System.Windows.Forms.Padding(0, 0, 0, 12);
-            this.rbOptionA.Size = new System.Drawing.Size(181, 54);
+            this.rbOptionA.Size = new System.Drawing.Size(942, 54);
             this.rbOptionA.TabIndex = 0;
             this.rbOptionA.TabStop = true;
             this.rbOptionA.Text = "A. Đáp án 1";
@@ -359,13 +358,12 @@ namespace QuizMe
             // 
             // rbOptionB
             // 
-            this.rbOptionB.AutoSize = true;
             this.rbOptionB.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbOptionB.Location = new System.Drawing.Point(4, 91);
             this.rbOptionB.Margin = new System.Windows.Forms.Padding(4);
             this.rbOptionB.Name = "rbOptionB";
             this.rbOptionB.Padding = new System.Windows.Forms.Padding(0, 0, 0, 12);
-            this.rbOptionB.Size = new System.Drawing.Size(179, 54);
+            this.rbOptionB.Size = new System.Drawing.Size(940, 54);
             this.rbOptionB.TabIndex = 1;
             this.rbOptionB.TabStop = true;
             this.rbOptionB.Text = "B. Đáp án 2";
@@ -373,13 +371,12 @@ namespace QuizMe
             // 
             // rbOptionC
             // 
-            this.rbOptionC.AutoSize = true;
             this.rbOptionC.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbOptionC.Location = new System.Drawing.Point(4, 153);
             this.rbOptionC.Margin = new System.Windows.Forms.Padding(4);
             this.rbOptionC.Name = "rbOptionC";
             this.rbOptionC.Padding = new System.Windows.Forms.Padding(0, 0, 0, 12);
-            this.rbOptionC.Size = new System.Drawing.Size(180, 54);
+            this.rbOptionC.Size = new System.Drawing.Size(941, 54);
             this.rbOptionC.TabIndex = 2;
             this.rbOptionC.TabStop = true;
             this.rbOptionC.Text = "C. Đáp án 3";
@@ -387,13 +384,12 @@ namespace QuizMe
             // 
             // rbOptionD
             // 
-            this.rbOptionD.AutoSize = true;
             this.rbOptionD.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbOptionD.Location = new System.Drawing.Point(4, 215);
             this.rbOptionD.Margin = new System.Windows.Forms.Padding(4);
             this.rbOptionD.Name = "rbOptionD";
             this.rbOptionD.Padding = new System.Windows.Forms.Padding(0, 0, 0, 12);
-            this.rbOptionD.Size = new System.Drawing.Size(183, 54);
+            this.rbOptionD.Size = new System.Drawing.Size(944, 54);
             this.rbOptionD.TabIndex = 3;
             this.rbOptionD.TabStop = true;
             this.rbOptionD.Text = "D. Đáp án 4";
@@ -431,7 +427,6 @@ namespace QuizMe
             this.pnlMainContent.ResumeLayout(false);
             this.pnlFooter.ResumeLayout(false);
             this.flowOptions.ResumeLayout(false);
-            this.flowOptions.PerformLayout();
             this.ResumeLayout(false);
 
         }

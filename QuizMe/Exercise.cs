@@ -13,17 +13,17 @@ namespace QuizMe
 {
     public partial class Exercise : Form
     {
-        // Danh sách câu hỏi lấy từ DB
+        //luu cau hoi tu db
         List<Question> questions = new List<Question>();
 
-        // Tổng số câu (lấy từ SubjectStorage hiện tại)
+        // tong cau hoi
         private int _totalQuestions = SubjectStorage.CurrentSubject.SoCauHoi;
         private int _currentQuestionIndex = 0;
 
-        // Lưu đáp án người dùng: key = index câu hỏi (0-based), value = 0=A,1=B,2=C,3=D
+        // luu dap an nguoi dung 1=A,2=B,3=C,4=D
         private Dictionary<int, int> _userAnswers = new Dictionary<int, int>();
 
-        // Timer đếm ngược (tạo động để tránh phụ thuộc vào designer)
+        // countdown
         private Timer examTimer;
         private int remainingSeconds = 0; // sẽ set mặc định trong constructor
 
@@ -31,32 +31,25 @@ namespace QuizMe
         {
             InitializeComponent();
 
-            // Tạo timer
+            
             examTimer = new Timer();
             examTimer.Interval = 1000; // 1 giây
             examTimer.Tick += ExamTimer_Tick;
 
-            // Mặc định thời gian thi
-            remainingSeconds = SubjectStorage.CurrentSubject.ThoiGianThi * 60; // 900 giây
+            // Tinh thoi gian thi
+            remainingSeconds = SubjectStorage.CurrentSubject.ThoiGianThi * 60;
             UpdateCountdownLabel();
 
-            // Nếu trong Subject có thời gian (nếu bạn muốn), bạn có thể set remainingSeconds từ đó.
-            // Ví dụ: if (SubjectStorage.CurrentSubject.TimeLimitMinutes != null) remainingSeconds = SubjectStorage.CurrentSubject.TimeLimitMinutes * 60;
-
-            // Nối sự kiện CheckedChanged cho các RadioButton (nếu các control đã được tạo trong designer)
-            // Nếu bạn đặt tên khác trong designer, hãy đổi tên tương ứng.
+       
             rbOptionA.CheckedChanged += rbOptionA_CheckedChanged;
             rbOptionB.CheckedChanged += rbOptionB_CheckedChanged;
             rbOptionC.CheckedChanged += rbOptionC_CheckedChanged;
             rbOptionD.CheckedChanged += rbOptionD_CheckedChanged;
 
-            // Gán sự kiện Load form (nếu designer chưa gán)
             this.Load += frmExam_Load;
 
-            // Load câu hỏi từ database
             LoadQuestionsFromDatabase();
 
-            // Load thông tin (tên sv, lớp, môn, lần thi) và trộn câu
             Load_info();
         }
 
@@ -117,11 +110,9 @@ namespace QuizMe
                 }
                 lbLanthi.Text = LanThi.ToString();
 
-                // Nếu tổng số câu lớn hơn số câu lấy được từ DB thì điều chỉnh
                 if (questions.Count < _totalQuestions)
                     _totalQuestions = questions.Count;
 
-                // Lấy ngẫu nhiên _totalQuestions câu (Utilities.GetRandomElements) và shuffle
                 if (questions.Count > 0)
                 {
                     questions = Utilities.GetRandomElements(questions, _totalQuestions);
@@ -131,7 +122,7 @@ namespace QuizMe
                 // Khởi tạo nút câu hỏi
                 LoadQuestionButtons();
 
-                // Khởi động bộ đếm (nếu muốn)
+                // Khởi động bộ đếm
                 examTimer.Start();
             }
             catch (Exception ex)
@@ -142,8 +133,7 @@ namespace QuizMe
 
         private void frmExam_Load(object sender, EventArgs e)
         {
-            // Tạo các nút bấm bên phải (nếu chưa tạo trong Load_info)
-            //LoadQuestionButtons(); // đã gọi trong Load_info
+            // Tạo các nút bấm bên phải
 
             // Tải câu hỏi đầu tiên
             if (_totalQuestions > 0)
@@ -152,7 +142,6 @@ namespace QuizMe
                 MessageBox.Show("Không có câu hỏi để hiển thị.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        // Tải nội dung câu hỏi, đáp án vào Giao diện
         private void LoadQuestion(int questionIndex)
         {
             if (questions == null || questions.Count == 0) return;
@@ -167,13 +156,12 @@ namespace QuizMe
             rbOptionC.Text = $"C. {(questions[questionIndex].LuaChon.Count > 2 ? questions[questionIndex].LuaChon[2] : "-----")}";
             rbOptionD.Text = $"D. {(questions[questionIndex].LuaChon.Count > 3 ? questions[questionIndex].LuaChon[3] : "-----")}";
 
-            // cập nhật tiến trình hiện tại
             lblCurrentQuestionInfo.Text = $"Câu {questionIndex + 1} / {_totalQuestions}";
 
             // Xóa chọn tất cả đáp án
             ClearAnswers();
 
-            // Tô lại đáp án đã chọn (nếu có)
+            // Tô lại đáp án
             if (_userAnswers.ContainsKey(questionIndex))
             {
                 int selected = _userAnswers[questionIndex];
@@ -190,10 +178,10 @@ namespace QuizMe
             UpdateQuestionButtonStyles(questionIndex + 1);
         }
 
-        /// Tạo các nút bấm 1, 2, 3... bên phải
+        // Tạo các nút bấm 1, 2, 3... bên phải
         private void LoadQuestionButtons()
         {
-            flowQuestionButtons.Controls.Clear(); // Xóa các nút cũ (nếu có)
+            flowQuestionButtons.Controls.Clear(); // Xóa các nút cũ
 
             for (int i = 1; i <= _totalQuestions; i++)
             {
@@ -204,7 +192,7 @@ namespace QuizMe
                 btn.FlatAppearance.BorderColor = Color.LightGray;
                 btn.BackColor = Color.White;
                 btn.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-                btn.Tag = i; // Lưu lại số thứ tự câu hỏi
+                btn.Tag = i;
 
                 // Gán sự kiện Click
                 btn.Click += QuestionButton_Click;
@@ -213,13 +201,11 @@ namespace QuizMe
             }
         }
 
-        // Xử lý khi nhấn vào một nút câu hỏi bên phải
         private void QuestionButton_Click(object sender, EventArgs e)
         {
             Button clickedButton = (Button)sender;
             int newIndex = (int)clickedButton.Tag - 1;
 
-            // Lưu tạm (đã lưu ngay khi CheckedChanged xảy ra), nên chỉ chuyển câu
             _currentQuestionIndex = newIndex;
 
             LoadQuestion(_currentQuestionIndex);
@@ -234,7 +220,7 @@ namespace QuizMe
                     int btnNumber = (int)btn.Tag;
                     if (btnNumber == currentQuestionNumber)
                     {
-                        // Đây là câu hỏi hiện tại
+                        //câu hỏi hiện tại
                         btn.BackColor = Color.FromArgb(30, 144, 255); // Màu xanh
                         btn.ForeColor = Color.White;
                     }
@@ -266,7 +252,6 @@ namespace QuizMe
         //submit
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            // người dùng chưa trả lời câu hiện tại nhưng muốn submit vẫn chấm theo câu đã trả lời
             int correctCount = 0;
 
             for (int i = 0; i < _totalQuestions; i++)
@@ -330,7 +315,7 @@ namespace QuizMe
         {
             if (rbOptionA.Checked)
             {
-                _userAnswers[_currentQuestionIndex] = 0;
+                _userAnswers[_currentQuestionIndex] = 1;
                 UpdateQuestionButtonStyles(_currentQuestionIndex + 1);
             }
         }
@@ -339,7 +324,7 @@ namespace QuizMe
         {
             if (rbOptionB.Checked)
             {
-                _userAnswers[_currentQuestionIndex] = 1;
+                _userAnswers[_currentQuestionIndex] = 2;
                 UpdateQuestionButtonStyles(_currentQuestionIndex + 1);
             }
         }
@@ -348,7 +333,7 @@ namespace QuizMe
         {
             if (rbOptionC.Checked)
             {
-                _userAnswers[_currentQuestionIndex] = 2;
+                _userAnswers[_currentQuestionIndex] = 3;
                 UpdateQuestionButtonStyles(_currentQuestionIndex + 1);
             }
         }
@@ -357,7 +342,7 @@ namespace QuizMe
         {
             if (rbOptionD.Checked)
             {
-                _userAnswers[_currentQuestionIndex] = 3;
+                _userAnswers[_currentQuestionIndex] = 4;
                 UpdateQuestionButtonStyles(_currentQuestionIndex + 1);
             }
         }
