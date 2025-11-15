@@ -434,3 +434,15 @@ insert into Users values (
 	'14DHTH07',
 	'0838557433'
 );
+
+-- admin
+insert into Users values (
+    '000',
+	'Admin',
+	'admin',
+	null,
+	'Admin',
+	null,
+	null,
+	null
+);

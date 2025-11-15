@@ -13,3 +13,4 @@ D:\HungQuang_WorkSpace\QuizMe\QuizMe\obj\Debug\QuizMe.home.resources
 D:\HungQuang_WorkSpace\QuizMe\QuizMe\obj\Debug\QuizMe.Forgot.resources
 D:\HungQuang_WorkSpace\QuizMe\QuizMe\obj\Debug\QuizMe.ChangePassword.resources
 D:\HungQuang_WorkSpace\QuizMe\QuizMe\obj\Debug\QuizMe.Exercise.resources
+D:\HungQuang_WorkSpace\QuizMe\QuizMe\obj\Debug\QuizMe.Admin.AdminHome.resources

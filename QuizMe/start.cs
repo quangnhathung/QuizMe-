@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using QuizMe.Admin;
 
 namespace QuizMe
 {
@@ -71,8 +72,13 @@ namespace QuizMe
                             HomeForm.Show();
                             this.Hide();
                         }
-                        else Utilities.MessageBoxInfor($"{UserStorage.Role} User hiện tại thuộc admin hoặc giảng viên!");
-                        
+                        else
+                        {
+                            AdminHome form = new AdminHome();
+                            form.Show();
+                            this.Hide();
+                        }
+
 
                     }
                     else

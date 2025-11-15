@@ -52,6 +52,12 @@
     <Compile Include="Account\ChangePassword.Designer.cs">
       <DependentUpon>ChangePassword.cs</DependentUpon>
     </Compile>
+    <Compile Include="Admin\AdminHome.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\AdminHome.Designer.cs">
+      <DependentUpon>AdminHome.cs</DependentUpon>
+    </Compile>
     <Compile Include="Data.cs" />
     <Compile Include="Student\Exercise.cs">
       <SubType>Form</SubType>
@@ -91,6 +97,9 @@
     <Compile Include="Utilities.cs" />
     <EmbeddedResource Include="Account\ChangePassword.resx">
       <DependentUpon>ChangePassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\AdminHome.resx">
+      <DependentUpon>AdminHome.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Student\Exercise.resx">
       <DependentUpon>Exercise.cs</DependentUpon>
@@ -134,5 +143,6 @@
     <Content Include="assets\Avatar.png" />
     <Content Include="query.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
