@@ -83,5 +83,20 @@ namespace QuizMe.Admin
             // Thêm User Control vào panel chính
             pnlMainContent.Controls.Add(uc);
         }
+
+        private void btnViewStudents_Click(object sender, EventArgs e)
+        {
+            lblHeaderTitle.Text = "TRA CỨU SINH VIÊN";
+
+            // Xóa nội dung cũ trong panel chính
+            pnlMainContent.Controls.Clear();
+
+            // Tạo một thể hiện (instance) của User Control
+            StudentDetail uc = new StudentDetail();
+            uc.Dock = DockStyle.Fill; // Tự động lấp đầy panel
+
+            // Thêm User Control vào panel chính
+            pnlMainContent.Controls.Add(uc);
+        }
     }
 }

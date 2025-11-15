@@ -95,6 +95,7 @@ namespace QuizMe.Admin
             this.btnViewStudents.Text = "Xem sinh viên";
             this.btnViewStudents.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnViewStudents.UseVisualStyleBackColor = true;
+            this.btnViewStudents.Click += new System.EventHandler(this.btnViewStudents_Click);
             // 
             // btnQuestionBank
             // 
