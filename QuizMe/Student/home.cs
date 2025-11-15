@@ -27,7 +27,7 @@ namespace QuizMe
 
         }
 
-        private void Load_Subject()
+        public void Load_Subject()
         {
             cmbSubjects.Items.Clear();
             SubjectStorage.Clear();

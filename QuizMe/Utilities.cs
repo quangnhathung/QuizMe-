@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+
 
 namespace QuizMe
 {
@@ -60,6 +62,46 @@ namespace QuizMe
                 list[j] = tmp;
             }
             return list;
+        }
+
+        //taoj id câu hỏi mới 
+        public static string GenerateNewQuestionId()
+        {
+            string newId = "000001";
+
+            try
+            {
+                using (SqlConnection db = Data.GetConnection())
+                {
+                    db.Open();
+
+                    string query = "SELECT MAX(Id) FROM CauHoi";   // Id là CHAR(6)
+
+                    using (SqlCommand cmd = new SqlCommand(query, db))
+                    {
+                        object result = cmd.ExecuteScalar();
+
+                        if (result != DBNull.Value && result != null)
+                        {
+                            int num = int.Parse(result.ToString());
+                            num++; // tăng 1
+                            newId = num.ToString("D5"); // format thành 5 chữ số
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi tạo mã tự động: " + ex.Message);
+            }
+
+            return newId;
+        }
+
+        public static string ToRaw(Question q)
+        {
+            string answers = string.Join("|", q.LuaChon);
+            return q.CauHoi + "_" + answers;
         }
     }
 }

@@ -58,6 +58,12 @@
     <Compile Include="Admin\AdminHome.Designer.cs">
       <DependentUpon>AdminHome.cs</DependentUpon>
     </Compile>
+    <Compile Include="Admin\QuestionBank.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Admin\QuestionBank.Designer.cs">
+      <DependentUpon>QuestionBank.cs</DependentUpon>
+    </Compile>
     <Compile Include="Data.cs" />
     <Compile Include="Student\Exercise.cs">
       <SubType>Form</SubType>
@@ -100,6 +106,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\AdminHome.resx">
       <DependentUpon>AdminHome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\QuestionBank.resx">
+      <DependentUpon>QuestionBank.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Student\Exercise.resx">
       <DependentUpon>Exercise.cs</DependentUpon>

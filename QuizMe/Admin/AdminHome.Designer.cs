@@ -112,6 +112,7 @@ namespace QuizMe.Admin
             this.btnQuestionBank.Text = "Ngân hàng câu hỏi";
             this.btnQuestionBank.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnQuestionBank.UseVisualStyleBackColor = true;
+            this.btnQuestionBank.Click += new System.EventHandler(this.btnQuestionBank_Click);
             // 
             // pnlLogo
             // 

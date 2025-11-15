@@ -31,9 +31,11 @@ namespace QuizMe
     }
     public class Question
     {
+        public string Macauhoi { get; set; }
         public string CauHoi { get; set; }
         public List<string> LuaChon { get; set; } = new List<string>();
         public int DapAn { get; set; }
+        public string Mon { get; set; }
 
         public Question(string rawData)
         {
