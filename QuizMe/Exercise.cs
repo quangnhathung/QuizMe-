@@ -167,10 +167,10 @@ namespace QuizMe
                 int selected = _userAnswers[questionIndex];
                 switch (selected)
                 {
-                    case 0: rbOptionA.Checked = true; break;
-                    case 1: rbOptionB.Checked = true; break;
-                    case 2: rbOptionC.Checked = true; break;
-                    case 3: rbOptionD.Checked = true; break;
+                    case 1: rbOptionA.Checked = true; break;
+                    case 2: rbOptionB.Checked = true; break;
+                    case 3: rbOptionC.Checked = true; break;
+                    case 4: rbOptionD.Checked = true; break;
                 }
             }
 
@@ -279,6 +279,8 @@ namespace QuizMe
                     // Dừng timer và đóng form
                     if (examTimer != null && examTimer.Enabled) examTimer.Stop();
 
+                    questions.Clear();
+                    SubjectStorage.Subjects.Clear();
                     home homeForm = new home();
                     this.Hide();
                     homeForm.Show();
