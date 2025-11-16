@@ -98,5 +98,35 @@ namespace QuizMe.Admin
             // Thêm User Control vào panel chính
             pnlMainContent.Controls.Add(uc);
         }
+
+        private void btnDsSinhvien_Click(object sender, EventArgs e)
+        {
+            lblHeaderTitle.Text = "DANH SÁCH SINH VIÊN";
+
+            // Xóa nội dung cũ trong panel chính
+            pnlMainContent.Controls.Clear();
+
+            // Tạo một thể hiện (instance) của User Control mới
+            StudentList uc = new StudentList();
+            uc.Dock = DockStyle.Fill; // Tự động lấp đầy panel
+
+            // Thêm User Control vào panel chính
+            pnlMainContent.Controls.Add(uc);
+        }
+
+        private void btnResult_Click(object sender, EventArgs e)
+        {
+            lblHeaderTitle.Text = "DANH SÁCH KẾT QUẢ THI";
+
+            // Xóa nội dung cũ trong panel chính
+            pnlMainContent.Controls.Clear();
+
+            // Tạo một thể hiện (instance) của User Control mới
+            Result uc = new Result();
+            uc.Dock = DockStyle.Fill; // Tự động lấp đầy panel
+
+            // Thêm User Control vào panel chính
+            pnlMainContent.Controls.Add(uc);
+        }
     }
 }

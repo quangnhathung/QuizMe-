@@ -75,10 +75,13 @@ namespace QuizMe.Admin
                             {
                                 studentFound = true;
 
-                                lblHoTen.Text = rd["HoTen"].ToString();
-                                lblGioiTinh.Text = rd["GioiTinh"].ToString();
-                                lblNgaySinh.Text = Convert.ToDateTime(rd["NgaySinh"]).ToString("dd/MM/yyyy");
-                                lblMaLop.Text = rd["MaLop"].ToString();
+                                lblHoTen.Text = rd["HoTen"]?.ToString() ?? "-----";
+                                lblGioiTinh.Text = rd["GioiTinh"]?.ToString() ?? "-----";
+                                lblMaLop.Text = rd["MaLop"]?.ToString() ?? "-----";
+
+                                lblNgaySinh.Text = rd["NgaySinh"] == DBNull.Value
+                                    ? "-----"
+                                    : Convert.ToDateTime(rd["NgaySinh"]).ToString("dd/MM/yyyy");
 
                                 _currentMaSV = maSV;
                                 pnlResults.Visible = true;
@@ -153,9 +156,6 @@ namespace QuizMe.Admin
                             "Thông báo",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Information);
-
-            // Ví dụ:
-            // ReportGenerator.CreateStudentReport(_currentMaSV);
         }
     }
 }

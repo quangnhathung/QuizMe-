@@ -41,7 +41,7 @@ create table KetQua(
 	MaSinhvien char(10),
 	Diem float,
 	LanThi int,
-	constraint pk_Ketqua primary key (MaMon, MaSinhVien),
+	constraint pk_Ketqua primary key (MaMon, MaSinhVien, LanThi),
 	constraint Fk_kq_Mon foreign key (MaMon) references MonThi(Id),
 	constraint Fk_kq_user foreign key (MaSinhVien) references Users(UId)
 );
@@ -82,35 +82,35 @@ BEGIN
     END
 END;
 go
--- tang lan thi neu sin vien thi lai
-GO
-CREATE TRIGGER trg_KetQua_UpdateLanThi
-ON KetQua
-INSTEAD OF INSERT
-AS
-BEGIN
-    SET NOCOUNT ON;
+---- tang lan thi neu sin vien thi lai
+--GO
+--CREATE TRIGGER trg_KetQua_UpdateLanThi
+--ON KetQua
+--INSTEAD OF INSERT
+--AS
+--BEGIN
+--    SET NOCOUNT ON;
 
-    -- 1) Cập nhật điểm và tăng lần thi cho các sinh viên đã từng thi môn này
-    UPDATE k
-    SET 
-        k.LanThi = k.LanThi + 1,
-        k.Diem = i.Diem
-    FROM KetQua k
-    INNER JOIN inserted i
-        ON k.MaMon = i.MaMon
-       AND k.MaSinhVien = i.MaSinhVien;
+--    -- 1) Cập nhật điểm và tăng lần thi cho các sinh viên đã từng thi môn này
+--    UPDATE k
+--    SET 
+--        k.LanThi = k.LanThi + 1,
+--        k.Diem = i.Diem
+--    FROM KetQua k
+--    INNER JOIN inserted i
+--        ON k.MaMon = i.MaMon
+--       AND k.MaSinhVien = i.MaSinhVien;
 
-    -- 2) Thêm dữ liệu mới cho sinh viên thi lần đầu
-    INSERT INTO KetQua (MaMon, MaSinhVien, Diem, LanThi)
-    SELECT i.MaMon, i.MaSinhVien, i.Diem, 1
-    FROM inserted i
-    LEFT JOIN KetQua k
-        ON k.MaMon = i.MaMon
-       AND k.MaSinhVien = i.MaSinhVien
-    WHERE k.MaMon IS NULL;
-END;
-GO
+--    -- 2) Thêm dữ liệu mới cho sinh viên thi lần đầu
+--    INSERT INTO KetQua (MaMon, MaSinhVien, Diem, LanThi)
+--    SELECT i.MaMon, i.MaSinhVien, i.Diem, 1
+--    FROM inserted i
+--    LEFT JOIN KetQua k
+--        ON k.MaMon = i.MaMon
+--       AND k.MaSinhVien = i.MaSinhVien
+--    WHERE k.MaMon IS NULL;
+--END;
+--GO
 
 GO
 CREATE TRIGGER trg_Users_DefaultRole
@@ -204,7 +204,7 @@ VALUES
 ('00047', N'Choose correct comparison: This is the .... book I have read._more interesting|most interesting|more interested|most interested', 2, 'MT001'),
 ('00048', N'Choose correct vocabulary: She gave me a .... advice._good|well|better|best', 1, 'MT001'),
 ('00049', N'Choose correct sequence: First we will eat, .... we will go out._and|then|but|or', 2, 'MT001'),
-('00050', N'Choose correct pronoun: Each of the students .... a book._have|has|are|is', 2, 'MT001');
+('00050', N'Choose correct pronoun: Each of the students .... a book._have|has|are|is', 2, 'MT001'),
 
 
 -- MT002: Đại số tuyến tính (00051 - 00100)
@@ -416,11 +416,7 @@ VALUES
 ('00250', N'Trong tiến hóa, selection pressure là yếu tố: _ảnh hưởng đến fitness và tần suất allele trong quần thể|không liên quan|luôn xấu|luôn tốt', 1, 'MT005')
 ;
 go
--- Gán DapAn = ((IdNumber-1) % 4) + 1 cho các môn MT001..MT005
-UPDATE CauHoi
-SET DapAn = ((CAST(RIGHT(Id,5) AS INT) - 1) % 4) + 1
-WHERE MaMon IN ('MT001','MT002','MT003','MT004','MT005');
-go
+
 
 -- mock user
 
@@ -434,7 +430,7 @@ insert into Users values (
 	'14DHTH07',
 	'0838557433'
 );
-
+go
 -- admin
 insert into Users values (
     '000',

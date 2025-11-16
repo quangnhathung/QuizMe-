@@ -41,7 +41,7 @@ namespace QuizMe
                 try
                 {
                     cmd.ExecuteNonQuery();
-                    Utilities.MessageBoxError("Đổi mật khẩu thành công!");
+                    Utilities.MessageBoxInfor("Đổi mật khẩu thành công!");
                     this.Hide();
                     new start().Show();
                 }

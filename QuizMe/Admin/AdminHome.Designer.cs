@@ -41,6 +41,8 @@ namespace QuizMe.Admin
             this.btnClose = new System.Windows.Forms.Button();
             this.pnlMainContent = new System.Windows.Forms.Panel();
             this.lblWelcome = new System.Windows.Forms.Label();
+            this.btnDsSinhvien = new System.Windows.Forms.Button();
+            this.btnResult = new System.Windows.Forms.Button();
             this.pnlSidebar.SuspendLayout();
             this.pnlLogo.SuspendLayout();
             this.pnlHeader.SuspendLayout();
@@ -50,6 +52,8 @@ namespace QuizMe.Admin
             // pnlSidebar
             // 
             this.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
+            this.pnlSidebar.Controls.Add(this.btnResult);
+            this.pnlSidebar.Controls.Add(this.btnDsSinhvien);
             this.pnlSidebar.Controls.Add(this.btnLogout);
             this.pnlSidebar.Controls.Add(this.btnViewStudents);
             this.pnlSidebar.Controls.Add(this.btnQuestionBank);
@@ -218,6 +222,42 @@ namespace QuizMe.Admin
             this.lblWelcome.TabIndex = 0;
             this.lblWelcome.Text = "Chào mừng Admin! Vui lòng chọn chức năng bên trái.";
             // 
+            // btnDsSinhvien
+            // 
+            this.btnDsSinhvien.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnDsSinhvien.FlatAppearance.BorderSize = 0;
+            this.btnDsSinhvien.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDsSinhvien.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDsSinhvien.ForeColor = System.Drawing.Color.White;
+            this.btnDsSinhvien.Location = new System.Drawing.Point(0, 246);
+            this.btnDsSinhvien.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDsSinhvien.Name = "btnDsSinhvien";
+            this.btnDsSinhvien.Padding = new System.Windows.Forms.Padding(13, 0, 0, 0);
+            this.btnDsSinhvien.Size = new System.Drawing.Size(333, 74);
+            this.btnDsSinhvien.TabIndex = 4;
+            this.btnDsSinhvien.Text = "Danh sách sinh viên";
+            this.btnDsSinhvien.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDsSinhvien.UseVisualStyleBackColor = true;
+            this.btnDsSinhvien.Click += new System.EventHandler(this.btnDsSinhvien_Click);
+            // 
+            // btnResult
+            // 
+            this.btnResult.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnResult.FlatAppearance.BorderSize = 0;
+            this.btnResult.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnResult.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnResult.ForeColor = System.Drawing.Color.White;
+            this.btnResult.Location = new System.Drawing.Point(0, 320);
+            this.btnResult.Margin = new System.Windows.Forms.Padding(4);
+            this.btnResult.Name = "btnResult";
+            this.btnResult.Padding = new System.Windows.Forms.Padding(13, 0, 0, 0);
+            this.btnResult.Size = new System.Drawing.Size(333, 74);
+            this.btnResult.TabIndex = 5;
+            this.btnResult.Text = "Kết quả thi";
+            this.btnResult.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnResult.UseVisualStyleBackColor = true;
+            this.btnResult.Click += new System.EventHandler(this.btnResult_Click);
+            // 
             // AdminHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -256,5 +296,7 @@ namespace QuizMe.Admin
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label lblHeaderTitle;
         private System.Windows.Forms.Label lblWelcome;
+        private System.Windows.Forms.Button btnResult;
+        private System.Windows.Forms.Button btnDsSinhvien;
     }
 }
