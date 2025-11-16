@@ -46,72 +46,72 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account\ChangePassword.cs">
+    <Compile Include="Internal\Account\ChangePassword.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Account\ChangePassword.Designer.cs">
+    <Compile Include="Internal\Account\ChangePassword.Designer.cs">
       <DependentUpon>ChangePassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="Admin\AdminHome.cs">
+    <Compile Include="Internal\Admin\AdminHome.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Admin\AdminHome.Designer.cs">
+    <Compile Include="Internal\Admin\AdminHome.Designer.cs">
       <DependentUpon>AdminHome.cs</DependentUpon>
     </Compile>
-    <Compile Include="Admin\QuestionBank.cs">
+    <Compile Include="Internal\Admin\QuestionBank.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Admin\QuestionBank.Designer.cs">
+    <Compile Include="Internal\Admin\QuestionBank.Designer.cs">
       <DependentUpon>QuestionBank.cs</DependentUpon>
     </Compile>
-    <Compile Include="Admin\Result.cs">
+    <Compile Include="Internal\Admin\Result.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Admin\Result.Designer.cs">
+    <Compile Include="Internal\Admin\Result.Designer.cs">
       <DependentUpon>Result.cs</DependentUpon>
     </Compile>
-    <Compile Include="Admin\StudentDetail.cs">
+    <Compile Include="Internal\Admin\StudentDetail.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Admin\StudentDetail.Designer.cs">
+    <Compile Include="Internal\Admin\StudentDetail.Designer.cs">
       <DependentUpon>StudentDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Admin\StudentList.cs">
+    <Compile Include="Internal\Admin\StudentList.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Admin\StudentList.Designer.cs">
+    <Compile Include="Internal\Admin\StudentList.Designer.cs">
       <DependentUpon>StudentList.cs</DependentUpon>
     </Compile>
     <Compile Include="Data.cs" />
-    <Compile Include="Student\EditInfomation.cs">
+    <Compile Include="Internal\Student\EditInfomation.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Student\EditInfomation.Designer.cs">
+    <Compile Include="Internal\Student\EditInfomation.Designer.cs">
       <DependentUpon>EditInfomation.cs</DependentUpon>
     </Compile>
-    <Compile Include="Student\Exercise.cs">
+    <Compile Include="Internal\Student\Exercise.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Student\Exercise.Designer.cs">
+    <Compile Include="Internal\Student\Exercise.Designer.cs">
       <DependentUpon>Exercise.cs</DependentUpon>
     </Compile>
-    <Compile Include="Account\Forgot.cs">
+    <Compile Include="Internal\Account\Forgot.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Account\Forgot.Designer.cs">
+    <Compile Include="Internal\Account\Forgot.Designer.cs">
       <DependentUpon>Forgot.cs</DependentUpon>
     </Compile>
-    <Compile Include="Student\home.cs">
+    <Compile Include="Internal\Student\home.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Student\home.Designer.cs">
+    <Compile Include="Internal\Student\home.Designer.cs">
       <DependentUpon>home.cs</DependentUpon>
     </Compile>
     <Compile Include="Storage\LocalStorage.cs" />
-    <Compile Include="Account\Register.cs">
+    <Compile Include="Internal\Account\Register.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Account\Register.Designer.cs">
+    <Compile Include="Internal\Account\Register.Designer.cs">
       <DependentUpon>Register.cs</DependentUpon>
     </Compile>
     <Compile Include="start.cs">
@@ -125,28 +125,28 @@
     <Compile Include="Storage\SubjectStorage.cs" />
     <Compile Include="Storage\UserStorage.cs" />
     <Compile Include="Utilities.cs" />
-    <EmbeddedResource Include="Account\ChangePassword.resx">
+    <EmbeddedResource Include="Internal\Account\ChangePassword.resx">
       <DependentUpon>ChangePassword.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Admin\AdminHome.resx">
+    <EmbeddedResource Include="Internal\Admin\AdminHome.resx">
       <DependentUpon>AdminHome.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Admin\QuestionBank.resx">
+    <EmbeddedResource Include="Internal\Admin\QuestionBank.resx">
       <DependentUpon>QuestionBank.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Admin\StudentDetail.resx">
+    <EmbeddedResource Include="Internal\Admin\StudentDetail.resx">
       <DependentUpon>StudentDetail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Student\EditInfomation.resx">
+    <EmbeddedResource Include="Internal\Student\EditInfomation.resx">
       <DependentUpon>EditInfomation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Student\Exercise.resx">
+    <EmbeddedResource Include="Internal\Student\Exercise.resx">
       <DependentUpon>Exercise.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Account\Forgot.resx">
+    <EmbeddedResource Include="Internal\Account\Forgot.resx">
       <DependentUpon>Forgot.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Student\home.resx">
+    <EmbeddedResource Include="Internal\Student\home.resx">
       <DependentUpon>home.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -159,7 +159,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Account\Register.resx">
+    <EmbeddedResource Include="Internal\Account\Register.resx">
       <DependentUpon>Register.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="start.resx">

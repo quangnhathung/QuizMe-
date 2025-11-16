@@ -91,9 +91,9 @@ namespace QuizMe
             this.lblTitle.ForeColor = System.Drawing.Color.White;
             this.lblTitle.Location = new System.Drawing.Point(33, 29);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(424, 41);
+            this.lblTitle.Size = new System.Drawing.Size(413, 41);
             this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Chỉnh sửa Thông tin Cá nhân";
+            this.lblTitle.Text = "Chỉnh sửa thông tin cá nhân";
             this.lblTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlHeader_MouseDown);
             this.lblTitle.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlHeader_MouseMove);
             this.lblTitle.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnlHeader_MouseUp);

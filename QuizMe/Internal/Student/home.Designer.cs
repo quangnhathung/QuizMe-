@@ -76,9 +76,9 @@ namespace QuizMe
             this.lblAppTitle.Location = new System.Drawing.Point(27, 18);
             this.lblAppTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAppTitle.Name = "lblAppTitle";
-            this.lblAppTitle.Size = new System.Drawing.Size(403, 37);
+            this.lblAppTitle.Size = new System.Drawing.Size(762, 37);
             this.lblAppTitle.TabIndex = 2;
-            this.lblAppTitle.Text = "HỆ THỐNG THI TRẮC NGHIỆM";
+            this.lblAppTitle.Text = "QUIZ ME! Hệ thống thi trắc nghiệm \"TỐT NHÂT\" Việt Nam";
             // 
             // btnMinimize
             // 
@@ -154,7 +154,7 @@ namespace QuizMe
             // 
             this.lbDob.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbDob.ForeColor = System.Drawing.Color.DimGray;
-            this.lbDob.Location = new System.Drawing.Point(107, 338);
+            this.lbDob.Location = new System.Drawing.Point(120, 338);
             this.lbDob.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbDob.Name = "lbDob";
             this.lbDob.Size = new System.Drawing.Size(193, 25);
