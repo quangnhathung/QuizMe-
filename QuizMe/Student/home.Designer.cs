@@ -35,6 +35,7 @@ namespace QuizMe
             this.btnMinimize = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.pnlSidebar = new System.Windows.Forms.Panel();
+            this.BtnEdit = new System.Windows.Forms.Button();
             this.lbDob = new System.Windows.Forms.Label();
             this.lbGioitinh = new System.Windows.Forms.Label();
             this.lbMalop = new System.Windows.Forms.Label();
@@ -114,6 +115,7 @@ namespace QuizMe
             // pnlSidebar
             // 
             this.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(247)))), ((int)(((byte)(252)))));
+            this.pnlSidebar.Controls.Add(this.BtnEdit);
             this.pnlSidebar.Controls.Add(this.lbDob);
             this.pnlSidebar.Controls.Add(this.lbGioitinh);
             this.pnlSidebar.Controls.Add(this.lbMalop);
@@ -131,6 +133,22 @@ namespace QuizMe
             this.pnlSidebar.Name = "pnlSidebar";
             this.pnlSidebar.Size = new System.Drawing.Size(333, 524);
             this.pnlSidebar.TabIndex = 1;
+            // 
+            // BtnEdit
+            // 
+            this.BtnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.BtnEdit.FlatAppearance.BorderSize = 0;
+            this.BtnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnEdit.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnEdit.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.BtnEdit.Location = new System.Drawing.Point(34, 393);
+            this.BtnEdit.Margin = new System.Windows.Forms.Padding(4);
+            this.BtnEdit.Name = "BtnEdit";
+            this.BtnEdit.Size = new System.Drawing.Size(267, 49);
+            this.BtnEdit.TabIndex = 11;
+            this.BtnEdit.Text = "Chỉnh sửa thông tin";
+            this.BtnEdit.UseVisualStyleBackColor = true;
+            this.BtnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
             // 
             // lbDob
             // 
@@ -353,5 +371,6 @@ namespace QuizMe
         private System.Windows.Forms.Label lbGioitinh;
         private System.Windows.Forms.Label lbMalop;
         private System.Windows.Forms.Label LbUid;
+        private System.Windows.Forms.Button BtnEdit;
     }
 }

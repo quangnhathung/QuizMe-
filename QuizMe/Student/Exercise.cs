@@ -252,7 +252,7 @@ namespace QuizMe
         //submit
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-             int correctCount = 0;
+            int correctCount = 0;
 
             for (int i = 0; i < _totalQuestions; i++)
             {

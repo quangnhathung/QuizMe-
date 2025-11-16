@@ -98,5 +98,12 @@ namespace QuizMe
                 form.Show();
             }
         }
+
+        private void BtnEdit_Click(object sender, EventArgs e)
+        {
+            EditInfomation Form = new EditInfomation();
+            this.Hide();
+            Form.Show();
+        }
     }
 }

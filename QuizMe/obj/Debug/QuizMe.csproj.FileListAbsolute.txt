@@ -16,3 +16,4 @@ D:\HungQuang_WorkSpace\QuizMe\QuizMe\obj\Debug\QuizMe.Exercise.resources
 D:\HungQuang_WorkSpace\QuizMe\QuizMe\obj\Debug\QuizMe.Admin.AdminHome.resources
 D:\HungQuang_WorkSpace\QuizMe\QuizMe\obj\Debug\QuizMe.Admin.QuestionBank.resources
 D:\HungQuang_WorkSpace\QuizMe\QuizMe\obj\Debug\QuizMe.Admin.StudentDetail.resources
+D:\HungQuang_WorkSpace\QuizMe\QuizMe\obj\Debug\QuizMe.EditInfomation.resources
