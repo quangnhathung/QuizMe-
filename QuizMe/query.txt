@@ -148,7 +148,9 @@ VALUES
 ('MT002', N'Đại số tuyến tính', 25, 60),
 ('MT003', N'Mạng máy tính', 40, 45),
 ('MT004', N'Hóa', 25, 60),
-('MT005', N'Sinh', 40, 45);
+('MT005', N'Sinh', 40, 45),
+('MT006', N'Kinh tế chính trị Mác-Lenin', 50, 70),
+('MT007', N'Bảo mật máy tính', 40, 60);
 go
 
 --Thêm câu hỏi
@@ -413,8 +415,59 @@ VALUES
 ('00247', N'Ở cấp quần thể, growth rate phụ thuộc vào: _birth rate và death rate|màu sắc|kích thước cá thể|sức khỏe trung bình', 1, 'MT005'),
 ('00248', N'Kháng sinh thường tác động lên: _vi khuẩn nhưng không phải virus|virus|nấm|tất cả', 1, 'MT005'),
 ('00249', N'Ở hệ miễn dịch, tế bào T cytotoxic tiêu diệt: _tế bào bị nhiễm virus hoặc tế bào ung thư|vi khuẩn ngoài tế bào|sinh vật phù du|hồng cầu', 1, 'MT005'),
-('00250', N'Trong tiến hóa, selection pressure là yếu tố: _ảnh hưởng đến fitness và tần suất allele trong quần thể|không liên quan|luôn xấu|luôn tốt', 1, 'MT005')
-;
+('00250', N'Trong tiến hóa, selection pressure là yếu tố: _ảnh hưởng đến fitness và tần suất allele trong quần thể|không liên quan|luôn xấu|luôn tốt', 1, 'MT005'),
+
+('00251', N'Lượng giá trị của hàng hóa được đo bằng: _Thời gian lao động cá biệt|Thời gian lao động xã hội cần thiết|Chi phí nguyên vật liệu|Sự khan hiếm của hàng hóa', 2, 'MT006'),
+('00252', N'Mâu thuẫn cơ bản của sản xuất hàng hóa giản đơn là: _Giữa lao động tư nhân và lao động xã hội|Giữa giá trị sử dụng và giá trị|Giữa cung và cầu|Giữa người giàu và người nghèo', 1, 'MT006'),
+('00253', N'Tiền tệ có mấy chức năng cơ bản? _3 chức năng|4 chức năng|5 chức năng|2 chức năng', 3, 'MT006'),
+('00254', N'Công thức chung của tư bản là: _H - T - H|T - H - T|T - H - T''|H - T - H''', 3, 'MT006'),
+('00255', N'Sức lao động trở thành hàng hóa khi có đủ hai điều kiện: _Tự do thân thể và không có tư liệu sản xuất|Có kỹ năng và có sức khỏe|Được trả lương và có hợp đồng|Có nhu cầu làm việc và có người thuê', 1, 'MT006'),
+('00256', N'Giá trị thặng dư (m) là gì? _Lợi nhuận của doanh nghiệp|Phần giá trị mới dôi ra ngoài giá trị sức lao động|Tiền lương của công nhân|Chi phí khấu hao máy móc', 2, 'MT006'),
+('00257', N'Tư bản bất biến (c) dùng để mua: _Sức lao động|Tư liệu sản xuất|Hàng hóa tiêu dùng|Dịch vụ', 2, 'MT006'),
+('00258', N'Tư bản khả biến (v) dùng để mua: _Máy móc thiết bị|Nguyên nhiên vật liệu|Sức lao động|Nhà xưởng', 3, 'MT006'),
+('00259', N'Tỷ suất giá trị thặng dư (m'') phản ánh: _Quy mô bóc lột|Trình độ bóc lột|Hiệu quả sử dụng vốn|Tốc độ chu chuyển tư bản', 2, 'MT006'),
+('00260', N'Phương pháp sản xuất giá trị thặng dư tuyệt đối thực hiện bằng cách: _Kéo dài ngày lao động|Tăng năng suất lao động|Rút ngắn thời gian lao động tất yếu|Sử dụng máy móc hiện đại', 1, 'MT006'),
+('00261', N'Phương pháp sản xuất giá trị thặng dư tương đối thực hiện bằng cách: _Kéo dài thời gian lao động|Tăng cường độ lao động|Tăng năng suất lao động xã hội|Giảm lương công nhân', 3, 'MT006'),
+('00262', N'Tích lũy tư bản là quá trình: _Tiêu dùng hết giá trị thặng dư|Biến một phần giá trị thặng dư thành tư bản|Cất trữ tiền vào két sắt|Đầu tư vào bất động sản', 2, 'MT006'),
+('00263', N'Cấu tạo hữu cơ của tư bản (c/v) tăng lên phản ánh: _Sự lạc hậu về kỹ thuật|Sự tiến bộ của kỹ thuật và công nghệ|Sự giảm sút của tư bản bất biến|Sự tăng lên của tư bản khả biến', 2, 'MT006'),
+('00264', N'Nguồn gốc của lợi nhuận thương nghiệp là: _Do mua rẻ bán đắt|Một phần giá trị thặng dư do công nhân sản xuất tạo ra|Do tài năng của nhà buôn|Do chênh lệch giá cả thị trường', 2, 'MT006'),
+('00265', N'Địa tô tư bản chủ nghĩa là phần giá trị thặng dư còn lại sau khi khấu trừ: _Lợi nhuận bình quân|Chi phí sản xuất|Tiền lương|Thuế', 1, 'MT006'),
+('00266', N'Nguyên nhân sâu xa của khủng hoảng kinh tế trong chủ nghĩa tư bản là: _Mâu thuẫn giữa tính chất xã hội hóa của LLSX với chế độ chiếm hữu tư nhân TBCN|Thiên tai dịch bệnh|Chính sách quản lý kém|Sự cạnh tranh gay gắt', 1, 'MT006'),
+('00267', N'Đặc điểm kinh tế cơ bản của chủ nghĩa tư bản độc quyền bao gồm: _Xuất khẩu hàng hóa|Xuất khẩu tư bản|Tự do cạnh tranh hoàn toàn|Sự tan rã của các tổ chức độc quyền', 2, 'MT006'),
+('00268', N'Tư bản tài chính là sự hợp nhất giữa: _Tư bản công nghiệp và tư bản thương nghiệp|Tư bản ngân hàng độc quyền và tư bản công nghiệp độc quyền|Tư bản nhà nước và tư bản tư nhân|Tư bản trong nước và tư bản nước ngoài', 2, 'MT006'),
+('00269', N'Kinh tế thị trường định hướng xã hội chủ nghĩa ở Việt Nam có nhiều hình thức sở hữu, trong đó vai trò chủ đạo thuộc về: _Kinh tế tư nhân|Kinh tế nhà nước|Kinh tế tập thể|Kinh tế có vốn đầu tư nước ngoài', 2, 'MT006'),
+('00270', N'Lợi ích kinh tế là động lực trực tiếp của: _Các chủ thể kinh tế|Nhà nước|Các tổ chức chính trị|Riêng người lao động', 1, 'MT006'),
+('00271', N'Cuộc cách mạng công nghiệp lần thứ nhất gắn liền với việc phát minh ra: _Động cơ đốt trong|Máy hơi nước|Điện năng|Công nghệ thông tin', 2, 'MT006'),
+('00272', N'Hội nhập kinh tế quốc tế là quá trình: _Đóng cửa nền kinh tế để tự chủ|Gắn kết nền kinh tế quốc gia với nền kinh tế khu vực và thế giới|Chỉ xuất khẩu không nhập khẩu|Chỉ hợp tác về chính trị', 2, 'MT006'),
+('00273', N'Công nghiệp hóa, hiện đại hóa ở Việt Nam nhằm mục tiêu: _Dân giàu, nước mạnh, dân chủ, công bằng, văn minh|Tăng trưởng kinh tế bằng mọi giá|Phát triển công nghiệp nặng|Xóa bỏ nông nghiệp', 1, 'MT006'),
+('00274', N'Thành phần kinh tế giữ vai trò nòng cốt trong nền kinh tế Việt Nam hiện nay là: _Kinh tế tư nhân|Kinh tế nhà nước và Kinh tế tập thể|Kinh tế cá thể|Kinh tế tư bản nhà nước', 2, 'MT006'),
+('00275', N'Khi năng suất lao động tăng thì giá trị của một đơn vị hàng hóa sẽ: _Tăng lên|Giảm xuống|Không đổi|Biến động tùy ý', 2, 'MT006'),
+('00276', N'Khi cường độ lao động tăng thì tổng giá trị hàng hóa tạo ra trong một đơn vị thời gian sẽ: _Tăng lên|Giảm xuống|Không đổi|Bằng không', 1, 'MT006'),
+('00277', N'Tiền tệ làm chức năng phương tiện thanh toán khi: _Mua hàng trả tiền ngay|Trả nợ, nộp thuế|Dùng để đo lường giá trị|Cất trữ vàng', 2, 'MT006'),
+('00278', N'Quy luật lưu thông tiền tệ xác định lượng tiền cần thiết dựa trên: _Tổng giá cả hàng hóa và tốc độ lưu thông của tiền|Lượng vàng dự trữ|Số lượng ngân hàng|Mệnh giá tiền giấy', 1, 'MT006'),
+('00279', N'Lao động trừu tượng là: _Lao động của người thợ mộc|Lao động của người thợ may|Sự hao phí sức lực nói chung của con người|Lao động tạo ra giá trị sử dụng', 3, 'MT006'),
+('00280', N'Lao động cụ thể tạo ra: _Giá trị hàng hóa|Giá trị sử dụng của hàng hóa|Giá trị thặng dư|Tiền tệ', 2, 'MT006'),
+('00281', N'Tuần hoàn của tư bản công nghiệp trải qua mấy giai đoạn? _2 giai đoạn|3 giai đoạn|4 giai đoạn|5 giai đoạn', 2, 'MT006'),
+('00282', N'Thời gian chu chuyển của tư bản bao gồm: _Thời gian sản xuất và thời gian lưu thông|Thời gian lao động và thời gian nghỉ ngơi|Thời gian mua và thời gian bán|Thời gian vận chuyển và bảo quản', 1, 'MT006'),
+('00283', N'Tư bản cố định bao gồm: _Máy móc, nhà xưởng|Nguyên nhiên vật liệu|Tiền lương|Hàng hóa thành phẩm', 1, 'MT006'),
+('00284', N'Tư bản lưu động bao gồm: _Máy móc và thiết bị|Nhà xưởng và đất đai|Nguyên nhiên vật liệu và tiền lương|Xe cộ vận tải', 3, 'MT006'),
+('00285', N'Cạnh tranh trong nội bộ ngành dẫn đến hình thành: _Giá trị thị trường|Lợi nhuận bình quân|Giá cả sản xuất|Độc quyền', 1, 'MT006'),
+('00286', N'Cạnh tranh giữa các ngành dẫn đến hình thành: _Giá trị cá biệt|Lợi nhuận bình quân|Giá trị thặng dư siêu ngạch|Giá cả độc quyền', 2, 'MT006'),
+('00287', N'Công ty cổ phần là hình thức xí nghiệp tư bản chủ nghĩa dựa trên: _Sự tập trung tư bản thông qua phát hành cổ phiếu|Vốn của nhà nước|Vốn của một cá nhân duy nhất|Sự vay nợ ngân hàng', 1, 'MT006'),
+('00288', N'Lợi tức là một phần của: _Lợi nhuận bình quân|Vốn đầu tư|Chi phí sản xuất|Tiền lương công nhân', 1, 'MT006'),
+('00289', N'Thị trường chứng khoán là nơi mua bán: _Hàng hóa tiêu dùng|Các loại giấy tờ có giá (chứng khoán)|Bất động sản|Máy móc thiết bị cũ', 2, 'MT006'),
+('00290', N'Xuất khẩu tư bản là: _Mang hàng hóa ra nước ngoài bán|Đưa vốn ra nước ngoài để tìm kiếm lợi nhuận cao|Du lịch nước ngoài|Hợp tác văn hóa', 2, 'MT006'),
+('00291', N'Chủ nghĩa tư bản độc quyền nhà nước là sự kết hợp giữa: _Các tổ chức độc quyền tư nhân và nhà nước tư sản|Công nhân và nông dân|Các quốc gia với nhau|Ngân hàng và doanh nghiệp', 1, 'MT006'),
+('00292', N'Cơ chế kinh tế của Việt Nam hiện nay là: _Cơ chế kế hoạch hóa tập trung|Cơ chế thị trường có sự quản lý của Nhà nước|Cơ chế tự do cạnh tranh hoàn toàn|Cơ chế bao cấp', 2, 'MT006'),
+('00293', N'Trong nền kinh tế thị trường, các chủ thể kinh tế hoạt động theo nguyên tắc: _Bình đẳng, cùng có lợi|Mệnh lệnh hành chính|Phục tùng tuyệt đối|Xin - cho', 1, 'MT006'),
+('00294', N'Vai trò của Nhà nước trong kinh tế thị trường định hướng XHCN là: _Đứng ngoài quan sát|Quản lý, điều tiết và định hướng|Can thiệp vào mọi hoạt động cụ thể|Chỉ thu thuế', 2, 'MT006'),
+('00295', N'Cách mạng công nghiệp 4.0 dựa trên nền tảng chính là: _Cơ khí hóa|Điện khí hóa|Công nghệ kỹ thuật số, Trí tuệ nhân tạo (AI), Big Data|Năng lượng hạt nhân', 3, 'MT006'),
+('00296', N'Một trong những đặc trưng của Kinh tế thị trường định hướng XHCN là: _Phân phối theo lao động là chủ yếu|Phân phối theo nhu cầu|Chỉ phân phối theo vốn|Không có phân phối lại', 1, 'MT006'),
+('00297', N'Quan hệ phân phối phản ánh: _Quan hệ sở hữu tư liệu sản xuất|Quan hệ tổ chức quản lý|Quan hệ gia đình|Quan hệ bạn bè', 1, 'MT006'),
+('00298', N'Lợi nhuận siêu ngạch trong nông nghiệp gọi là: _Địa tô chênh lệch|Địa tô tuyệt đối|Lợi tức|Tiền thuê đất', 1, 'MT006'),
+('00299', N'Chủ thể trung gian trong thị trường bao gồm: _Thương nhân, môi giới, ngân hàng|Chỉ có người sản xuất|Chỉ có người tiêu dùng|Chính phủ', 1, 'MT006');
+('00300', N'Điều kiện ra đời của sản xuất hàng hóa là: _Phân công lao động xã hội và sự tách biệt về kinh tế|Nhu cầu trao đổi và tiền tệ xuất hiện|Chế độ tư hữu và thị trường|Năng suất lao động tăng cao', 1, 'MT006'),
+
 go
 
 
