@@ -31,7 +31,7 @@ namespace QuizMe
         {
             InitializeComponent();
 
-            
+
             examTimer = new Timer();
             examTimer.Interval = 1000; // 1 giây
             examTimer.Tick += ExamTimer_Tick;
@@ -40,7 +40,7 @@ namespace QuizMe
             remainingSeconds = SubjectStorage.CurrentSubject.ThoiGianThi * 60;
             UpdateCountdownLabel();
 
-       
+
             rbOptionA.CheckedChanged += rbOptionA_CheckedChanged;
             rbOptionB.CheckedChanged += rbOptionB_CheckedChanged;
             rbOptionC.CheckedChanged += rbOptionC_CheckedChanged;
@@ -261,9 +261,12 @@ namespace QuizMe
                     if (_userAnswers[i] == questions[i].DapAn)
                         correctCount++;
                 }
-            }
-
+            }            
             double score = Math.Round((double)correctCount / _totalQuestions * 10, 2);
+            if (double.IsNaN(score) || double.IsInfinity(score))
+            {
+                score = 0; // hoặc giá trị mặc định
+            }
 
             DialogResult dr = MessageBox.Show(
                 $"Vẫn còn thời gian\nXác nhận nộp bài?",
@@ -307,7 +310,7 @@ namespace QuizMe
                         cmd.ExecuteNonQuery();
                     }
                     catch (Exception ex) { Utilities.MessageBoxError(ex.ToString()); }
-                    
+
                 }
             }
         }
