@@ -464,13 +464,8 @@ VALUES
 ('00296', N'Một trong những đặc trưng của Kinh tế thị trường định hướng XHCN là: _Phân phối theo lao động là chủ yếu|Phân phối theo nhu cầu|Chỉ phân phối theo vốn|Không có phân phối lại', 1, 'MT006'),
 ('00297', N'Quan hệ phân phối phản ánh: _Quan hệ sở hữu tư liệu sản xuất|Quan hệ tổ chức quản lý|Quan hệ gia đình|Quan hệ bạn bè', 1, 'MT006'),
 ('00298', N'Lợi nhuận siêu ngạch trong nông nghiệp gọi là: _Địa tô chênh lệch|Địa tô tuyệt đối|Lợi tức|Tiền thuê đất', 1, 'MT006'),
-<<<<<<< HEAD
 ('00299', N'Chủ thể trung gian trong thị trường bao gồm: _Thương nhân, môi giới, ngân hàng|Chỉ có người sản xuất|Chỉ có người tiêu dùng|Chính phủ', 1, 'MT006'),
 ('00300', N'Điều kiện ra đời của sản xuất hàng hóa là: _Phân công lao động xã hội và sự tách biệt về kinh tế|Nhu cầu trao đổi và tiền tệ xuất hiện|Chế độ tư hữu và thị trường|Năng suất lao động tăng cao', 1, 'MT006');
-=======
-('00299', N'Chủ thể trung gian trong thị trường bao gồm: _Thương nhân, môi giới, ngân hàng|Chỉ có người sản xuất|Chỉ có người tiêu dùng|Chính phủ', 1, 'MT006');
-('00300', N'Điều kiện ra đời của sản xuất hàng hóa là: _Phân công lao động xã hội và sự tách biệt về kinh tế|Nhu cầu trao đổi và tiền tệ xuất hiện|Chế độ tư hữu và thị trường|Năng suất lao động tăng cao', 1, 'MT006'),
->>>>>>> c6417d237301f1394984b2fdfc9baf4099a1b3da
 
 go
 
