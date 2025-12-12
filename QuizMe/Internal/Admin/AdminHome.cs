@@ -210,7 +210,7 @@ namespace QuizMe.Admin
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
                 ofd.Title = "Chọn file";
-                ofd.Filter = "Tất cả file (*.*)|*.*|File text (*.txt)|*.txt|Ảnh (*.png;*.jpg)|*.png;*.jpg";
+                ofd.Filter = "Backup Files (*.bak)|*.bak|All Files (*.*)|*.*";
                 ofd.FilterIndex = 1;
                 ofd.RestoreDirectory = true;
 
@@ -218,8 +218,6 @@ namespace QuizMe.Admin
                 {
                     string path = ofd.FileName;
                     pathRestore.Text = path; 
-                    // Ví dụ đọc file
-                    // string content = File.ReadAllText(path);
                 }
             }
         }
@@ -229,13 +227,125 @@ namespace QuizMe.Admin
 
         }
 
+
+        public static void SetupRestoreProcedure()
+        {
+            string query = @"
+        CREATE OR ALTER PROCEDURE sp_System_RestoreManager
+            @FullPath NVARCHAR(400)
+        AS
+        BEGIN
+            SET NOCOUNT ON;
+
+            DECLARE 
+                @Success BIT = 0,
+                @Message NVARCHAR(500);
+
+            BEGIN TRY
+                -- 1. Ngắt kết nối người dùng khác
+                IF EXISTS (SELECT name FROM sys.databases WHERE name = N'quizme_db')
+                BEGIN
+                    ALTER DATABASE [quizme_db] 
+                    SET SINGLE_USER 
+                    WITH ROLLBACK IMMEDIATE;
+                END
+
+                -- 2. Restore
+                RESTORE DATABASE [quizme_db]
+                FROM DISK = @FullPath
+                WITH FILE = 1,      
+                     REPLACE,        
+                     RECOVERY;      
+
+                -- 3. Mở lại kết nối
+                ALTER DATABASE [quizme_db] SET MULTI_USER;
+
+                SET @Success = 1;
+                SET @Message = N'Restore thành công từ file: ' + @FullPath;
+            END TRY
+            BEGIN CATCH
+                SET @Success = 0;
+                SET @Message = N'Lỗi Restore: ' + ERROR_MESSAGE();
+
+                BEGIN TRY
+                    ALTER DATABASE [quizme_db] SET MULTI_USER;
+                END TRY
+                BEGIN CATCH
+                END CATCH
+            END CATCH;
+
+            SELECT @Success AS Success, @Message AS Message;
+        END;
+    "; 
+
+            using (SqlConnection conn = Data.GetMasterConnection())
+            {
+                try
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show("Lỗi cài đặt Proc Restore: " + ex.Message);
+                }
+            }
+        }
+
+        public RestoreResult RestoreDatabase(string fullFilePath)
+        {
+            RestoreResult result = new RestoreResult();
+            SetupRestoreProcedure();
+
+            using (SqlConnection conn = Data.GetMasterConnection())
+            {
+                try
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand("sp_System_RestoreManager", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandTimeout = 120;
+
+                        cmd.Parameters.AddWithValue("@FullPath", fullFilePath);
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                result.Success = Convert.ToBoolean(reader["Success"]);
+                                result.Message = reader["Message"].ToString();
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    result.Success = false;
+                    result.Message = "Lỗi kết nối C#: " + ex.Message;
+                }
+            }
+            return result;
+        }
         private void button2_Click(object sender, EventArgs e)
         {
             if (pathRestore.Text == "") {
                 Utilities.MessageBoxInfor("Vui long chon file restore!");
                 return;
             }
-            
+            var result = RestoreDatabase(pathRestore.Text);
+
+            if (result.Success)
+            {
+                MessageBox.Show(result.Message, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show(result.Message, "Thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

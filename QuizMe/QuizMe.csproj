@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="dto\BackupResult.cs" />
     <Compile Include="dto\MonHoc.cs" />
+    <Compile Include="dto\RestoreResult.cs" />
     <Compile Include="Internal\Account\ChangePassword.cs">
       <SubType>Form</SubType>
     </Compile>

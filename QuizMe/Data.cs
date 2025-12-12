@@ -13,5 +13,10 @@ namespace QuizMe
         {
             return new SqlConnection(@"Server=localhost;Database=quizme_db;Integrated Security=True;");
         }
+
+        public static SqlConnection GetMasterConnection()
+        {
+            return new SqlConnection(@"Server=localhost;Database=master;Integrated Security=True;");
+        }
     }
 }
