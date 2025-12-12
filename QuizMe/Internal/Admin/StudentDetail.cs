@@ -16,7 +16,6 @@ namespace QuizMe.Admin
     public partial class StudentDetail : UserControl
     {
 
-        // Biến để lưu mã sinh viên đang xem, dùng cho nút Report
         private string _currentMaSV = "";
 
         public StudentDetail()
@@ -26,16 +25,15 @@ namespace QuizMe.Admin
 
         private void ucStudentDetail_Load(object sender, EventArgs e)
         {
-            // Ẩn panel kết quả khi mới vào
             pnlResults.Visible = false;
 
-            // Cho phép nhấn Enter để tìm kiếm
+
             txtSearchMaSV.KeyPress += (s, ev) =>
             {
                 if (ev.KeyChar == (char)Keys.Enter)
                 {
                     btnSearch.PerformClick();
-                    ev.Handled = true; // Ngăn tiếng "beep"
+                    ev.Handled = true; 
                 }
             };
         }
@@ -57,7 +55,6 @@ namespace QuizMe.Admin
                 {
                     db.Open();
 
-                    // ===== 1. TÌM THÔNG TIN SINH VIÊN =====
                     string querySV = @"
                 SELECT 
                     u.Uid,
