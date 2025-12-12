@@ -18,7 +18,7 @@ create table Users(
 	Ngaysinh datetime,
 	MaLop char(10),
 	Phone char(10),
-	constraint Fk_sv_lop foreign key (MaLop) references Lop(Id),
+	constraint Fk_sv_lop foreign key (MaLop) references Lop(Id)
 );
 go
 create table MonThi(
@@ -149,8 +149,13 @@ VALUES
 ('MT003', N'Mạng máy tính', 40, 45),
 ('MT004', N'Hóa', 25, 60),
 ('MT005', N'Sinh', 40, 45),
-('MT006', N'Kinh tế chính trị Mác-Lenin', 50, 70);
+('MT006', N'Kinh tế chính trị Mác-Lenin', 50, 60);
 go
+
+update Monthi
+set ThoiGianThi = 60
+where Id = 'MT006'
+
 
 --Thêm câu hỏi
 INSERT INTO CauHoi (Id, NoiDung, DapAn, MaMon)
@@ -470,12 +475,34 @@ VALUES
 go
 
 
+-- function
+--tra ve diem trung binh cua 1 sinh vien
+CREATE FUNCTION dbo.func_TinhDiemTrungBinh(@MaSinhVien CHAR(10))
+RETURNS FLOAT
+AS
+BEGIN
+    DECLARE @DiemTrungBinh FLOAT;
+
+    -- Tính trung bình cộng của các điểm số cao nhất theo từng môn
+    SELECT @DiemTrungBinh = AVG(MaxDiem)
+    FROM (
+        SELECT MAX(Diem) AS MaxDiem
+        FROM KetQua
+        WHERE MaSinhVien = @MaSinhVien
+        GROUP BY MaMon
+    ) AS BangDiemCaoNhat;
+
+    -- Nếu sinh viên chưa thi môn nào, trả về 0 thay vì NULL
+    RETURN ISNULL(@DiemTrungBinh, 0);
+END;
+GO
+
 -- mock user
 
 insert into Users values (
     '2001230328',
 	'Quang Nhat Hung',
-	'Quangnhathung',
+	'12345678',
 	N'Nam',
 	'Student',
 	'2005/05/11',

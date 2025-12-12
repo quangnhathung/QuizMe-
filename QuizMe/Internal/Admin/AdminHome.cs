@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using QuizMe;
 using System.Data.SqlClient;
+using QuizMe.Internal.Admin;
 
 namespace QuizMe.Admin
 {
@@ -19,7 +20,6 @@ namespace QuizMe.Admin
         {
             InitializeComponent();
             var util = new home();
-
 
             SubjectStorage.Clear();
             using (SqlConnection db = Data.GetConnection())

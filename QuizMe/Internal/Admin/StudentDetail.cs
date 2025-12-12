@@ -8,11 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using QuizMe.Internal.Admin;
+using QuizMe.Storage;
 
 namespace QuizMe.Admin
 {
     public partial class StudentDetail : UserControl
     {
+
         // Biến để lưu mã sinh viên đang xem, dùng cho nút Report
         private string _currentMaSV = "";
 
@@ -96,9 +99,9 @@ namespace QuizMe.Admin
                         }
                     }
 
-                    // ===== 2. NẾU TÌM THẤY SINH VIÊN → LẤY ĐIỂM TỪ KẾT QUẢ =====
                     if (studentFound)
                     {
+                        UserSearch.MaSv = _currentMaSV;
                         string queryKQ = @"
                     SELECT 
                         m.Name,
@@ -145,17 +148,17 @@ namespace QuizMe.Admin
 
         private void btnCreateReport_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(_currentMaSV))
+            if (!string.IsNullOrWhiteSpace(_currentMaSV))
             {
-                MessageBox.Show("Không có sinh viên nào được chọn để tạo report.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                StudentReport form = new StudentReport();
+                form.Show();
                 return;
             }
+            else {
+                Utilities.MessageBoxError("Không có sinh viên nào được chọn để tạo report.");
+            }
 
-            // (Đây là nơi bạn gọi hàm tạo report, ví dụ dùng Crystal Reports, RDLC, hoặc in ra Excel/PDF)
-            MessageBox.Show($"Bắt đầu tạo report cho sinh viên có mã: {_currentMaSV}",
-                            "Thông báo",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
+
         }
     }
 }

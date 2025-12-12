@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dto\MonHoc.cs" />
     <Compile Include="Internal\Account\ChangePassword.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +102,12 @@
       <DependentUpon>StudentList.cs</DependentUpon>
     </Compile>
     <Compile Include="Data.cs" />
+    <Compile Include="Internal\Admin\StudentReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Internal\Admin\StudentReport.Designer.cs">
+      <DependentUpon>StudentReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Internal\Student\EditInfomation.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,6 +149,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Storage\SubjectStorage.cs" />
+    <Compile Include="Storage\UserSearch.cs" />
     <Compile Include="Storage\UserStorage.cs" />
     <Compile Include="Utilities.cs" />
     <EmbeddedResource Include="Internal\Account\ChangePassword.resx">
@@ -155,6 +163,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Internal\Admin\StudentDetail.resx">
       <DependentUpon>StudentDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Internal\Admin\StudentReport.resx">
+      <DependentUpon>StudentReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Internal\Student\EditInfomation.resx">
       <DependentUpon>EditInfomation.cs</DependentUpon>
