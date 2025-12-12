@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dto\BackupResult.cs" />
     <Compile Include="dto\MonHoc.cs" />
     <Compile Include="Internal\Account\ChangePassword.cs">
       <SubType>Form</SubType>

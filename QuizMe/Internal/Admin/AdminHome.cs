@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using QuizMe;
 using System.Data.SqlClient;
-using QuizMe.Internal.Admin;
+using QuizMe.dto;
 
 namespace QuizMe.Admin
 {
@@ -127,6 +127,115 @@ namespace QuizMe.Admin
 
             // Thêm User Control vào panel chính
             pnlMainContent.Controls.Add(uc);
+        }
+
+        public BackupResult RunBackup(string path, string fileName, string mode)
+        {
+            BackupResult result = new BackupResult();
+
+            using (SqlConnection conn = Data.GetConnection())
+            {
+                try
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand("sp_System_BackupManager", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.CommandTimeout = 130;
+
+                        cmd.Parameters.AddWithValue("@Path", path);
+                        cmd.Parameters.AddWithValue("@FileName", fileName);
+                        cmd.Parameters.AddWithValue("@Mode", mode);
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                result.Success = Convert.ToBoolean(reader["Success"]);
+                                result.Message = reader["Message"].ToString();
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    result.Success = false;
+                    result.Message = "Lỗi hệ thống: " + ex.Message;
+                }
+            }
+
+            return result;
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string path = @"D:\QuizMe_SQLBackup\";
+            string fileName = $"Backup_Full_{DateTime.Now:yyyyMMdd_HHmmss}.bak";
+
+            string mode = "";
+
+            if (radioButton1.Checked == true)
+            {
+                mode = "FULL";
+            }
+            else if (radioButton2.Checked == true)
+            {
+                mode = "DIFF";
+            }
+
+            var result = RunBackup(path, fileName, mode);
+
+            if (result.Success)
+            {
+                MessageBox.Show(result.Message, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show(result.Message, "Thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void fileChoooser_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Title = "Chọn file";
+                ofd.Filter = "Tất cả file (*.*)|*.*|File text (*.txt)|*.txt|Ảnh (*.png;*.jpg)|*.png;*.jpg";
+                ofd.FilterIndex = 1;
+                ofd.RestoreDirectory = true;
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    string path = ofd.FileName;
+                    pathRestore.Text = path; 
+                    // Ví dụ đọc file
+                    // string content = File.ReadAllText(path);
+                }
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (pathRestore.Text == "") {
+                Utilities.MessageBoxInfor("Vui long chon file restore!");
+                return;
+            }
+            
         }
     }
 }

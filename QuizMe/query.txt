@@ -521,3 +521,177 @@ insert into Users values (
 	null,
 	null
 );
+
+---backup
+
+--  Full Backup
+CREATE OR ALTER PROCEDURE sp_System_BackupFull
+    @Path NVARCHAR(255),
+    @FileName NVARCHAR(100)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE 
+        @FullPath NVARCHAR(400),
+        @Success BIT = 0,
+        @Message NVARCHAR(500);
+
+    IF RIGHT(@Path, 1) <> '\' SET @Path = @Path + '\';
+    SET @FullPath = @Path + @FileName;
+
+    BEGIN TRY
+        BACKUP DATABASE [quizme_db]
+        TO DISK = @FullPath
+        WITH INIT,
+             NAME = N'quizme_db-Full Database Backup',
+             STATS = 10;
+
+        SET @Success = 1;
+        SET @Message = N'Full Backup thành công: ' + @FullPath;
+    END TRY
+    BEGIN CATCH
+        SET @Success = 0;
+        SET @Message = N'Lỗi Full Backup: ' + ERROR_MESSAGE();
+    END CATCH;
+
+    SELECT @Success AS Success, @Message AS Message;
+END;
+GO
+
+
+
+--Differential Backup
+CREATE OR ALTER PROCEDURE sp_System_BackupDiff
+    @Path NVARCHAR(255),
+    @FileName NVARCHAR(100)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE 
+        @FullPath NVARCHAR(400),
+        @Success BIT = 0,
+        @Message NVARCHAR(500);
+
+    IF RIGHT(@Path, 1) <> '\' SET @Path = @Path + '\';
+    SET @FullPath = @Path + @FileName;
+
+    BEGIN TRY
+        BACKUP DATABASE [quizme_db]
+        TO DISK = @FullPath
+        WITH DIFFERENTIAL,
+             INIT,
+             NAME = N'quizme_db-Differential Backup',
+             STATS = 10;
+
+        SET @Success = 1;
+        SET @Message = N'Differential Backup thành công: ' + @FullPath;
+    END TRY
+    BEGIN CATCH
+        SET @Success = 0;
+        SET @Message = N'Lỗi Diff Backup: ' + ERROR_MESSAGE()
+                       + N'. (Cần Full Backup trước)';
+    END CATCH;
+
+    SELECT @Success AS Success, @Message AS Message;
+END;
+GO
+
+
+CREATE OR ALTER PROCEDURE sp_System_BackupManager
+    @Path NVARCHAR(255),
+    @FileName NVARCHAR(100),
+    @Mode NVARCHAR(10)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE 
+        @FullPath NVARCHAR(400),
+        @Success BIT = 0,
+        @Message NVARCHAR(500);
+
+    IF RIGHT(@Path, 1) <> '\' SET @Path = @Path + '\';
+    SET @FullPath = @Path + @FileName;
+
+    BEGIN TRY
+        IF UPPER(@Mode) = 'FULL'
+        BEGIN
+            BACKUP DATABASE [quizme_db]
+            TO DISK = @FullPath
+            WITH INIT, NAME = N'Full Backup Via Manager', STATS = 10;
+
+            SET @Success = 1;
+            SET @Message = N'Thành công: Full Backup tạo tại ' + @FullPath;
+        END
+        ELSE IF UPPER(@Mode) = 'DIFF'
+        BEGIN
+            BACKUP DATABASE [quizme_db]
+            TO DISK = @FullPath
+            WITH DIFFERENTIAL, INIT,
+                 NAME = N'Diff Backup Via Manager', STATS = 10;
+
+            SET @Success = 1;
+            SET @Message = N'Thành công: Diff Backup tạo tại ' + @FullPath;
+        END
+        ELSE
+        BEGIN
+            SET @Success = 0;
+            SET @Message = N'Mode không hợp lệ. Chỉ nhận FULL hoặc DIFF.';
+        END
+    END TRY
+    BEGIN CATCH
+        SET @Success = 0;
+        SET @Message = N'Lỗi Backup Manager: ' + ERROR_MESSAGE();
+    END CATCH;
+
+    SELECT @Success AS Success, @Message AS Message;
+END;
+GO
+
+---restore
+
+CREATE OR ALTER PROCEDURE sp_System_RestoreManager
+    @FullPath NVARCHAR(400)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE 
+        @Success BIT = 0,
+        @Message NVARCHAR(500);
+
+    BEGIN TRY
+        IF EXISTS (SELECT name FROM sys.databases WHERE name = N'quizme_db')
+        BEGIN
+            ALTER DATABASE [quizme_db] 
+            SET SINGLE_USER 
+            WITH ROLLBACK IMMEDIATE;
+        END
+
+        RESTORE DATABASE [quizme_db]
+        FROM DISK = @FullPath
+        WITH FILE = 1,      
+             REPLACE,       
+             RECOVERY;      
+
+        ALTER DATABASE [quizme_db] SET MULTI_USER;
+
+        SET @Success = 1;
+        SET @Message = N'Restore thành công từ file: ' + @FullPath;
+    END TRY
+    BEGIN CATCH
+        SET @Success = 0;
+        SET @Message = N'Lỗi Restore: ' + ERROR_MESSAGE();
+
+        BEGIN TRY
+            ALTER DATABASE [quizme_db] SET MULTI_USER;
+        END TRY
+        BEGIN CATCH
+        END CATCH
+    END CATCH;
+
+    SELECT @Success AS Success, @Message AS Message;
+END;
+GO
