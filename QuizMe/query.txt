@@ -521,11 +521,11 @@ insert into Users values (
 	null,
 	null
 );
-
+go
 ---backup
 
 --  Full Backup
-CREATE OR ALTER PROCEDURE sp_System_BackupFull
+CREATE PROCEDURE sp_System_BackupFull
     @Path NVARCHAR(255),
     @FileName NVARCHAR(100)
 AS
@@ -562,7 +562,7 @@ GO
 
 
 --Differential Backup
-CREATE OR ALTER PROCEDURE sp_System_BackupDiff
+CREATE PROCEDURE sp_System_BackupDiff
     @Path NVARCHAR(255),
     @FileName NVARCHAR(100)
 AS
@@ -599,7 +599,7 @@ END;
 GO
 
 
-CREATE OR ALTER PROCEDURE sp_System_BackupManager
+CREATE PROCEDURE sp_System_BackupManager
     @Path NVARCHAR(255),
     @FileName NVARCHAR(100),
     @Mode NVARCHAR(10)
@@ -651,8 +651,10 @@ END;
 GO
 
 ---restore
-
-CREATE OR ALTER PROCEDURE sp_System_RestoreManager
+IF OBJECT_ID('dbo.sp_System_RestoreManager', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.sp_System_RestoreManager;
+GO
+CREATE PROCEDURE sp_System_RestoreManager
     @FullPath NVARCHAR(400)
 AS
 BEGIN
