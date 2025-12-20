@@ -78,6 +78,7 @@ namespace QuizMe.Admin
                             questions.Add(q);
                         }
                     }
+                    questions = questions.OrderBy(i => i.Mon).ToList();
                 }
             }
             catch (Exception ex)
@@ -89,7 +90,7 @@ namespace QuizMe.Admin
         private void ReloadGrid()
         {
             dgvQuestions.Rows.Clear();
-
+            questions = questions.OrderBy(i => i.Mon).ToList();
             foreach (var item in questions)
             {
                 string content = item.CauHoi + "_";
@@ -121,7 +122,7 @@ namespace QuizMe.Admin
         {
             ClearEditPanel();
             lblEditTitle.Text = "THÊM MỚI CÂU HỎI";
-            txtID.Text = "[Tự động tạo]";
+            //txtID.Text = "[Tự động tạo]";
             pnlEdit.Visible = true;
         }
 
@@ -236,15 +237,15 @@ namespace QuizMe.Admin
         {
             try
             {
-                string id = txtID.Text.Trim();   // KHÔNG GenerateId nếu đang sửa!!
+                string id = txtID.Text.Trim();
                 bool isNew = string.IsNullOrEmpty(id);
 
-                // Nếu là thêm mới → tự tạo ID
                 if (isNew)
                 {
                     id = Utilities.GenerateNewQuestionId();
                 }
 
+                id = id.Trim();
                 string noiDung = txtContent.Text.Trim();
                 string dapAnA = txtOptionA.Text.Trim();
                 string dapAnB = txtOptionB.Text.Trim();
@@ -265,13 +266,13 @@ namespace QuizMe.Admin
                 {
                     db.Open();
 
-                    // ---------- KIỂM TRA ID TỒN TẠI ----------
                     string checkQuery = "SELECT COUNT(*) FROM CauHoi WHERE Id = @Id";
                     bool exists = false;
 
                     using (SqlCommand checkCmd = new SqlCommand(checkQuery, db))
                     {
-                        checkCmd.Parameters.AddWithValue("@Id", id);
+                        Console.WriteLine(id);
+                        checkCmd.Parameters.Add("@Id", SqlDbType.Char, 5).Value = id;
                         exists = (int)checkCmd.ExecuteScalar() > 0;
                     }
 
@@ -279,7 +280,6 @@ namespace QuizMe.Admin
 
                     if (exists)
                     {
-                        // ---------- UPDATE ----------
                         query = @"UPDATE CauHoi 
                           SET NoiDung = @NoiDung,
                               DapAn = @DapAn,
@@ -288,14 +288,15 @@ namespace QuizMe.Admin
                     }
                     else
                     {
-                        // ---------- INSERT ----------
                         query = @"INSERT INTO CauHoi (Id, NoiDung, DapAn, MaMon)
                           VALUES (@Id, @NoiDung, @DapAn, @MaMon)";
                     }
 
                     using (SqlCommand cmd = new SqlCommand(query, db))
                     {
-                        cmd.Parameters.AddWithValue("@Id", id);
+                        Console.WriteLine(id);
+                        cmd.Parameters.Add("@Id", SqlDbType.Char, 5).Value = id;
+
                         cmd.Parameters.AddWithValue("@NoiDung", noiDungFull);
                         cmd.Parameters.AddWithValue("@DapAn", dapAnNumber);
                         cmd.Parameters.AddWithValue("@MaMon", maMon);

@@ -67,7 +67,7 @@ namespace QuizMe
         //taoj id câu hỏi mới 
         public static string GenerateNewQuestionId()
         {
-            string newId = "000001";
+            string newId = "00001";
 
             try
             {
@@ -75,7 +75,7 @@ namespace QuizMe
                 {
                     db.Open();
 
-                    string query = "SELECT MAX(Id) FROM CauHoi";   // Id là CHAR(6)
+                    string query = "SELECT MAX(CAST(Id AS INT)) FROM CauHoi";
 
                     using (SqlCommand cmd = new SqlCommand(query, db))
                     {
@@ -83,9 +83,9 @@ namespace QuizMe
 
                         if (result != DBNull.Value && result != null)
                         {
-                            int num = int.Parse(result.ToString());
-                            num++; // tăng 1
-                            newId = num.ToString("D5"); // format thành 5 chữ số
+                            int num = Convert.ToInt32(result) + 1;
+                            newId = num.ToString("D5");
+                            //Console.WriteLine(newId);
                         }
                     }
                 }
@@ -97,6 +97,7 @@ namespace QuizMe
 
             return newId;
         }
+
 
         public static string ToRaw(Question q)
         {

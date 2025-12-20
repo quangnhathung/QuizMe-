@@ -75,8 +75,9 @@ namespace QuizMe.Admin
             this.pnlTop.Controls.Add(this.lblFilter);
             this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTop.Location = new System.Drawing.Point(0, 0);
+            this.pnlTop.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlTop.Name = "pnlTop";
-            this.pnlTop.Size = new System.Drawing.Size(750, 60);
+            this.pnlTop.Size = new System.Drawing.Size(1000, 74);
             this.pnlTop.TabIndex = 0;
             // 
             // btnDelete
@@ -87,9 +88,10 @@ namespace QuizMe.Admin
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelete.ForeColor = System.Drawing.Color.White;
-            this.btnDelete.Location = new System.Drawing.Point(647, 15);
+            this.btnDelete.Location = new System.Drawing.Point(863, 18);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(80, 30);
+            this.btnDelete.Size = new System.Drawing.Size(107, 37);
             this.btnDelete.TabIndex = 4;
             this.btnDelete.Text = "Xóa";
             this.btnDelete.UseVisualStyleBackColor = false;
@@ -103,9 +105,10 @@ namespace QuizMe.Admin
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEdit.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEdit.ForeColor = System.Drawing.Color.White;
-            this.btnEdit.Location = new System.Drawing.Point(561, 15);
+            this.btnEdit.Location = new System.Drawing.Point(748, 18);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(80, 30);
+            this.btnEdit.Size = new System.Drawing.Size(107, 37);
             this.btnEdit.TabIndex = 3;
             this.btnEdit.Text = "Sửa";
             this.btnEdit.UseVisualStyleBackColor = false;
@@ -119,9 +122,10 @@ namespace QuizMe.Admin
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdd.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.ForeColor = System.Drawing.Color.White;
-            this.btnAdd.Location = new System.Drawing.Point(475, 15);
+            this.btnAdd.Location = new System.Drawing.Point(633, 18);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(80, 30);
+            this.btnAdd.Size = new System.Drawing.Size(107, 37);
             this.btnAdd.TabIndex = 2;
             this.btnAdd.Text = "Thêm";
             this.btnAdd.UseVisualStyleBackColor = false;
@@ -132,18 +136,20 @@ namespace QuizMe.Admin
             this.cmbSubjectFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSubjectFilter.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbSubjectFilter.FormattingEnabled = true;
-            this.cmbSubjectFilter.Location = new System.Drawing.Point(120, 18);
+            this.cmbSubjectFilter.Location = new System.Drawing.Point(160, 22);
+            this.cmbSubjectFilter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbSubjectFilter.Name = "cmbSubjectFilter";
-            this.cmbSubjectFilter.Size = new System.Drawing.Size(250, 25);
+            this.cmbSubjectFilter.Size = new System.Drawing.Size(332, 29);
             this.cmbSubjectFilter.TabIndex = 1;
             // 
             // lblFilter
             // 
             this.lblFilter.AutoSize = true;
             this.lblFilter.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFilter.Location = new System.Drawing.Point(20, 21);
+            this.lblFilter.Location = new System.Drawing.Point(27, 26);
+            this.lblFilter.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFilter.Name = "lblFilter";
-            this.lblFilter.Size = new System.Drawing.Size(94, 17);
+            this.lblFilter.Size = new System.Drawing.Size(120, 23);
             this.lblFilter.TabIndex = 0;
             this.lblFilter.Text = "Lọc theo môn:";
             // 
@@ -170,19 +176,21 @@ namespace QuizMe.Admin
             this.pnlEdit.Controls.Add(this.txtID);
             this.pnlEdit.Controls.Add(this.lblID);
             this.pnlEdit.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlEdit.Location = new System.Drawing.Point(400, 60); // Đổi vị trí
+            this.pnlEdit.Location = new System.Drawing.Point(533, 74);
+            this.pnlEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlEdit.Name = "pnlEdit";
-            this.pnlEdit.Size = new System.Drawing.Size(350, 460); // Đổi kích thước
+            this.pnlEdit.Size = new System.Drawing.Size(467, 566);
             this.pnlEdit.TabIndex = 1;
-            this.pnlEdit.Visible = false; // Quan trọng: Ẩn ban đầu
+            this.pnlEdit.Visible = false;
             // 
             // lblEditTitle
             // 
             this.lblEditTitle.AutoSize = true;
             this.lblEditTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEditTitle.Location = new System.Drawing.Point(20, 15);
+            this.lblEditTitle.Location = new System.Drawing.Point(27, 18);
+            this.lblEditTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEditTitle.Name = "lblEditTitle";
-            this.lblEditTitle.Size = new System.Drawing.Size(161, 21);
+            this.lblEditTitle.Size = new System.Drawing.Size(204, 28);
             this.lblEditTitle.TabIndex = 18;
             this.lblEditTitle.Text = "THÊM MỚI CÂU HỎI";
             // 
@@ -193,9 +201,10 @@ namespace QuizMe.Admin
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(243, 410);
+            this.btnCancel.Location = new System.Drawing.Point(324, 505);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(80, 30);
+            this.btnCancel.Size = new System.Drawing.Size(107, 37);
             this.btnCancel.TabIndex = 17;
             this.btnCancel.Text = "Hủy";
             this.btnCancel.UseVisualStyleBackColor = false;
@@ -208,9 +217,10 @@ namespace QuizMe.Admin
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(157, 410);
+            this.btnSave.Location = new System.Drawing.Point(209, 505);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(80, 30);
+            this.btnSave.Size = new System.Drawing.Size(107, 37);
             this.btnSave.TabIndex = 16;
             this.btnSave.Text = "Lưu";
             this.btnSave.UseVisualStyleBackColor = false;
@@ -220,9 +230,10 @@ namespace QuizMe.Admin
             // 
             this.lblCorrect.AutoSize = true;
             this.lblCorrect.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCorrect.Location = new System.Drawing.Point(21, 368);
+            this.lblCorrect.Location = new System.Drawing.Point(28, 453);
+            this.lblCorrect.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCorrect.Name = "lblCorrect";
-            this.lblCorrect.Size = new System.Drawing.Size(76, 15);
+            this.lblCorrect.Size = new System.Drawing.Size(95, 20);
             this.lblCorrect.TabIndex = 14;
             this.lblCorrect.Text = "Đáp án đúng";
             // 
@@ -236,100 +247,111 @@ namespace QuizMe.Admin
             "B",
             "C",
             "D"});
-            this.cmbCorrectAnswer.Location = new System.Drawing.Point(100, 365);
+            this.cmbCorrectAnswer.Location = new System.Drawing.Point(133, 449);
+            this.cmbCorrectAnswer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbCorrectAnswer.Name = "cmbCorrectAnswer";
-            this.cmbCorrectAnswer.Size = new System.Drawing.Size(223, 23);
+            this.cmbCorrectAnswer.Size = new System.Drawing.Size(296, 28);
             this.cmbCorrectAnswer.TabIndex = 15;
             // 
             // txtOptionD
             // 
             this.txtOptionD.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOptionD.Location = new System.Drawing.Point(100, 335);
+            this.txtOptionD.Location = new System.Drawing.Point(133, 412);
+            this.txtOptionD.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtOptionD.Name = "txtOptionD";
-            this.txtOptionD.Size = new System.Drawing.Size(223, 23);
+            this.txtOptionD.Size = new System.Drawing.Size(296, 27);
             this.txtOptionD.TabIndex = 13;
             // 
             // lblOptionD
             // 
             this.lblOptionD.AutoSize = true;
             this.lblOptionD.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOptionD.Location = new System.Drawing.Point(21, 338);
+            this.lblOptionD.Location = new System.Drawing.Point(28, 416);
+            this.lblOptionD.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOptionD.Name = "lblOptionD";
-            this.lblOptionD.Size = new System.Drawing.Size(56, 15);
+            this.lblOptionD.Size = new System.Drawing.Size(72, 20);
             this.lblOptionD.TabIndex = 12;
             this.lblOptionD.Text = "Đáp án D";
             // 
             // txtOptionC
             // 
             this.txtOptionC.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOptionC.Location = new System.Drawing.Point(100, 305);
+            this.txtOptionC.Location = new System.Drawing.Point(133, 375);
+            this.txtOptionC.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtOptionC.Name = "txtOptionC";
-            this.txtOptionC.Size = new System.Drawing.Size(223, 23);
+            this.txtOptionC.Size = new System.Drawing.Size(296, 27);
             this.txtOptionC.TabIndex = 11;
             // 
             // lblOptionC
             // 
             this.lblOptionC.AutoSize = true;
             this.lblOptionC.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOptionC.Location = new System.Drawing.Point(21, 308);
+            this.lblOptionC.Location = new System.Drawing.Point(28, 379);
+            this.lblOptionC.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOptionC.Name = "lblOptionC";
-            this.lblOptionC.Size = new System.Drawing.Size(55, 15);
+            this.lblOptionC.Size = new System.Drawing.Size(70, 20);
             this.lblOptionC.TabIndex = 10;
             this.lblOptionC.Text = "Đáp án C";
             // 
             // txtOptionB
             // 
             this.txtOptionB.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOptionB.Location = new System.Drawing.Point(100, 275);
+            this.txtOptionB.Location = new System.Drawing.Point(133, 338);
+            this.txtOptionB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtOptionB.Name = "txtOptionB";
-            this.txtOptionB.Size = new System.Drawing.Size(223, 23);
+            this.txtOptionB.Size = new System.Drawing.Size(296, 27);
             this.txtOptionB.TabIndex = 9;
             // 
             // lblOptionB
             // 
             this.lblOptionB.AutoSize = true;
             this.lblOptionB.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOptionB.Location = new System.Drawing.Point(21, 278);
+            this.lblOptionB.Location = new System.Drawing.Point(28, 342);
+            this.lblOptionB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOptionB.Name = "lblOptionB";
-            this.lblOptionB.Size = new System.Drawing.Size(55, 15);
+            this.lblOptionB.Size = new System.Drawing.Size(70, 20);
             this.lblOptionB.TabIndex = 8;
             this.lblOptionB.Text = "Đáp án B";
             // 
             // txtOptionA
             // 
             this.txtOptionA.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOptionA.Location = new System.Drawing.Point(100, 245);
+            this.txtOptionA.Location = new System.Drawing.Point(133, 302);
+            this.txtOptionA.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtOptionA.Name = "txtOptionA";
-            this.txtOptionA.Size = new System.Drawing.Size(223, 23);
+            this.txtOptionA.Size = new System.Drawing.Size(296, 27);
             this.txtOptionA.TabIndex = 7;
             // 
             // lblOptionA
             // 
             this.lblOptionA.AutoSize = true;
             this.lblOptionA.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOptionA.Location = new System.Drawing.Point(21, 248);
+            this.lblOptionA.Location = new System.Drawing.Point(28, 305);
+            this.lblOptionA.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOptionA.Name = "lblOptionA";
-            this.lblOptionA.Size = new System.Drawing.Size(55, 15);
+            this.lblOptionA.Size = new System.Drawing.Size(71, 20);
             this.lblOptionA.TabIndex = 6;
             this.lblOptionA.Text = "Đáp án A";
             // 
             // txtContent
             // 
             this.txtContent.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtContent.Location = new System.Drawing.Point(24, 150);
+            this.txtContent.Location = new System.Drawing.Point(32, 185);
+            this.txtContent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtContent.Multiline = true;
             this.txtContent.Name = "txtContent";
             this.txtContent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtContent.Size = new System.Drawing.Size(299, 80);
+            this.txtContent.Size = new System.Drawing.Size(397, 98);
             this.txtContent.TabIndex = 5;
             // 
             // lblContent
             // 
             this.lblContent.AutoSize = true;
             this.lblContent.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblContent.Location = new System.Drawing.Point(21, 130);
+            this.lblContent.Location = new System.Drawing.Point(28, 160);
+            this.lblContent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblContent.Name = "lblContent";
-            this.lblContent.Size = new System.Drawing.Size(99, 15);
+            this.lblContent.Size = new System.Drawing.Size(123, 20);
             this.lblContent.TabIndex = 4;
             this.lblContent.Text = "Nội dung câu hỏi";
             // 
@@ -338,38 +360,41 @@ namespace QuizMe.Admin
             this.cmbSubjectEdit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSubjectEdit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbSubjectEdit.FormattingEnabled = true;
-            this.cmbSubjectEdit.Location = new System.Drawing.Point(100, 95);
+            this.cmbSubjectEdit.Location = new System.Drawing.Point(133, 117);
+            this.cmbSubjectEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbSubjectEdit.Name = "cmbSubjectEdit";
-            this.cmbSubjectEdit.Size = new System.Drawing.Size(223, 23);
+            this.cmbSubjectEdit.Size = new System.Drawing.Size(296, 28);
             this.cmbSubjectEdit.TabIndex = 3;
             // 
             // lblSubject
             // 
             this.lblSubject.AutoSize = true;
             this.lblSubject.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSubject.Location = new System.Drawing.Point(21, 98);
+            this.lblSubject.Location = new System.Drawing.Point(28, 121);
+            this.lblSubject.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSubject.Name = "lblSubject";
-            this.lblSubject.Size = new System.Drawing.Size(57, 15);
+            this.lblSubject.Size = new System.Drawing.Size(67, 20);
             this.lblSubject.TabIndex = 2;
             this.lblSubject.Text = "Môn học";
             // 
             // txtID
             // 
             this.txtID.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtID.Location = new System.Drawing.Point(100, 60);
+            this.txtID.Location = new System.Drawing.Point(133, 74);
+            this.txtID.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtID.Name = "txtID";
             this.txtID.ReadOnly = true;
-            this.txtID.Size = new System.Drawing.Size(223, 23);
+            this.txtID.Size = new System.Drawing.Size(296, 27);
             this.txtID.TabIndex = 1;
-            this.txtID.Text = "[Tự động tạo]";
             // 
             // lblID
             // 
             this.lblID.AutoSize = true;
             this.lblID.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblID.Location = new System.Drawing.Point(21, 63);
+            this.lblID.Location = new System.Drawing.Point(28, 78);
+            this.lblID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblID.Name = "lblID";
-            this.lblID.Size = new System.Drawing.Size(63, 15);
+            this.lblID.Size = new System.Drawing.Size(82, 20);
             this.lblID.TabIndex = 0;
             this.lblID.Text = "Mã câu hỏi";
             // 
@@ -386,51 +411,57 @@ namespace QuizMe.Admin
             this.colAnswers,
             this.colSubject});
             this.dgvQuestions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvQuestions.Location = new System.Drawing.Point(0, 60);
+            this.dgvQuestions.Location = new System.Drawing.Point(0, 74);
+            this.dgvQuestions.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvQuestions.MultiSelect = false;
             this.dgvQuestions.Name = "dgvQuestions";
             this.dgvQuestions.ReadOnly = true;
+            this.dgvQuestions.RowHeadersWidth = 51;
             this.dgvQuestions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvQuestions.Size = new System.Drawing.Size(400, 460); // Đổi kích thước
+            this.dgvQuestions.Size = new System.Drawing.Size(533, 566);
             this.dgvQuestions.TabIndex = 2;
             // 
             // colID
             // 
+            this.colID.FillWeight = 10F;
             this.colID.HeaderText = "Mã";
+            this.colID.MinimumWidth = 6;
             this.colID.Name = "colID";
             this.colID.ReadOnly = true;
-            this.colID.FillWeight = 10F;
             // 
             // colContent
             // 
             this.colContent.HeaderText = "Nội dung";
+            this.colContent.MinimumWidth = 6;
             this.colContent.Name = "colContent";
             this.colContent.ReadOnly = true;
-            this.colContent.FillWeight = 100F;
             // 
             // colAnswers
             // 
+            this.colAnswers.FillWeight = 7F;
             this.colAnswers.HeaderText = "Đáp án";
+            this.colAnswers.MinimumWidth = 6;
             this.colAnswers.Name = "colAnswers";
             this.colAnswers.ReadOnly = true;
-            this.colAnswers.FillWeight = 7F;
             // 
             // colSubject
             // 
+            this.colSubject.FillWeight = 15F;
             this.colSubject.HeaderText = "Môn học";
+            this.colSubject.MinimumWidth = 6;
             this.colSubject.Name = "colSubject";
             this.colSubject.ReadOnly = true;
-            this.colSubject.FillWeight = 15F;
             // 
-            // ucQuestionBank
+            // QuestionBank
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvQuestions);
             this.Controls.Add(this.pnlEdit);
             this.Controls.Add(this.pnlTop);
-            this.Name = "ucQuestionBank";
-            this.Size = new System.Drawing.Size(750, 520);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Name = "QuestionBank";
+            this.Size = new System.Drawing.Size(1000, 640);
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             this.pnlEdit.ResumeLayout(false);
