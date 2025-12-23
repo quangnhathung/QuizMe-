@@ -169,7 +169,7 @@ namespace QuizMe.Admin
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            string path = @"D:\QuizMe_SQLBackup\";
+            string path = @"D:\";
             string fileName = $"Backup_Full_{DateTime.Now:yyyyMMdd_HHmmss}.bak";
 
             string mode = "";
