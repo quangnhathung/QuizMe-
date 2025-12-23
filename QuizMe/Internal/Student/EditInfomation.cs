@@ -135,22 +135,21 @@ namespace QuizMe
                 }
             }
 
-            // Lấy phone nếu có control txtPhone
-            string phone = null;
-            var phones = this.Controls.Find("txtPhone", true);
-            if (phones.Length > 0 && phones[0] is TextBox tbPhone)
-            {
-                phone = tbPhone.Text.Trim();
-                if (string.IsNullOrWhiteSpace(phone)) phone = null;
-            }
 
-            // Xử lý DateTimePicker: nếu có ShowCheckBox và unchecked => null, ngược lại lấy Value
+            string phone = txtSDT.Text;
+            phone = phone.Trim();
+            if (phone.Length == 10 && phone.All(char.IsDigit))
+            {
+            }
+            else phone = null;
+
+            Console.WriteLine(phone);
+
             DateTime? ngaysinh = null;
             if (dtpNgaySinh != null)
             {
                 try
                 {
-                    // nếu dtp có thuộc tính Checked (ShowCheckBox = true) và user bỏ unchecked => không lưu ngày
                     var prop = typeof(DateTimePicker).GetProperty("Checked");
                     if (prop != null)
                     {
@@ -162,7 +161,6 @@ namespace QuizMe
                     }
                     else
                     {
-                        // không có Checked -> luôn lấy Value
                         ngaysinh = dtpNgaySinh.Value;
                     }
                 }
@@ -172,7 +170,6 @@ namespace QuizMe
                 }
             }
 
-            // Thực hiện UPDATE lên DB
             try
             {
                 using (SqlConnection db = Data.GetConnection())
@@ -219,14 +216,14 @@ namespace QuizMe
                         {
                             MessageBox.Show("Cập nhật thông tin thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                            // Cập nhật UserStorage (nếu bạn sử dụng)
                             UserStorage.Ten = ten;
                             UserStorage.MaLop = maLop;
                             UserStorage.Phone = phone;
                             UserStorage.Gender = gioiTinh;
                             UserStorage.Dob = ngaysinh;
-
-                            // Nếu muốn đóng form hoặc quay về home, bạn có thể làm ở đây.
+                            //this.Close();
+                            //Exercise f = new Exercise();
+                            //f.Show();
                         }
                         else
                         {

@@ -135,7 +135,7 @@ namespace QuizMe
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(130, 45);
             this.btnCancel.TabIndex = 8;
-            this.btnCancel.Text = "Hủy";
+            this.btnCancel.Text = "Trở về";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
