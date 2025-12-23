@@ -115,7 +115,6 @@ namespace QuizMe
                 if (string.IsNullOrWhiteSpace(maLop)) maLop = null;
             }
 
-            // Lấy giới tính nếu control tồn tại (cmbGioiTinh hoặc txtGioiTinh)
             string gioiTinh = null;
             var cbs = this.Controls.Find("cmbGioiTinh", true);
             if (cbs.Length > 0 && cbs[0] is ComboBox cbG)
@@ -143,32 +142,54 @@ namespace QuizMe
             }
             else phone = null;
 
-            Console.WriteLine(phone);
 
             DateTime? ngaysinh = null;
+
             if (dtpNgaySinh != null)
             {
+                DateTime today = DateTime.Today;
+
                 try
                 {
                     var prop = typeof(DateTimePicker).GetProperty("Checked");
+
                     if (prop != null)
                     {
                         bool checkedBox = (bool)prop.GetValue(dtpNgaySinh);
                         if (checkedBox)
-                            ngaysinh = dtpNgaySinh.Value;
-                        else
-                            ngaysinh = null;
+                        {
+                            if (dtpNgaySinh.Value.Date < today)
+                                ngaysinh = dtpNgaySinh.Value.Date;
+                            else
+                            {
+                                Utilities.MessageBoxWarning("Ngày sinh phải bé hơn ngày hiện tại!");
+                                return;
+                            }
+                        }
                     }
                     else
                     {
-                        ngaysinh = dtpNgaySinh.Value;
+                        if (dtpNgaySinh.Value.Date < today)
+                            ngaysinh = dtpNgaySinh.Value.Date;
+                        else
+                        {
+                            Utilities.MessageBoxWarning("Ngày sinh phải bé hơn ngày hiện tại!");
+                            return;
+                        }
                     }
                 }
                 catch
                 {
-                    ngaysinh = dtpNgaySinh.Value;
+                    if (dtpNgaySinh.Value.Date < today)
+                        ngaysinh = dtpNgaySinh.Value.Date;
+                    else
+                    {
+                        Utilities.MessageBoxWarning("Ngày sinh phải bé hơn ngày hiện tại!");
+                        return;
+                    }
                 }
             }
+
 
             try
             {
@@ -221,9 +242,9 @@ namespace QuizMe
                             UserStorage.Phone = phone;
                             UserStorage.Gender = gioiTinh;
                             UserStorage.Dob = ngaysinh;
-                            //this.Close();
-                            //Exercise f = new Exercise();
-                            //f.Show();
+                            this.Close();
+                            home f = new home();
+                            f.Show();
                         }
                         else
                         {
